@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../css/default.css">
+    <title>Saga Pattern</title>
+</head>
+<body>
+    <h1>Saga</h1>
+
+    <img src="https://live.staticflickr.com/65535/54304198436_d6540294c3_z.jpg" alt="">
+   
+    <h2>O que é modelo Saga Pattern?</h2>
+
+    <p> O padrão arquitetural Saga ajuda a manter a consistência dos dados em sistemas distribuidos, uma saga é uma sequência de transações 
+        locais onde cada serviço executa sua operação e inicia a proxima etapa por meio de eventos ou mensagens. Se uma etapa na 
+        sequência falhar, a saga executa transações compensatórias para desfazer as etapas concluídas, mantendo a consistência dos dados.
+    </p>
+
+    <h2>O problema de lidar com transações distribuídas</h2>
+
+    <p>
+        Uma transação é basicamente uma sequência de operações que acontecem em multiplos sistemas para ser concluída. Por definição visa garantir que 
+        todas sejam executadas, ou nenhuma, caso uma das operações falhe. Uma transação se torna distribuida quando ativa operações em vários 
+        servidores diferentes
+    </p>
+
+
+    <h2>O problema de lidar com transações longas</h2>
+
+    <p>
+        Em diversos cenários, processos complexos exigem um periodo um pouco mais longo para serem concluidos em sua totalidade, 
+        podendo aumentar o risco de falhas, por exemplo uma transação pra reservar uma viagem, que consiste em reservar um voo, 
+        um carro alugado e um hotel, o tempo de espera da execução pode levar desde milissegundos até dias para ser finalizada 
+        completamente.
+    </p>
+     
+    <section>
+        <h2>Modelo Coreografado </h2>
+
+        <p>
+            O modelo Coreografado propõe que o microservico deve conhecer o serviço seguinte e o anterior, quando um microserviço é
+            chamado ele executa seu processo e encaminha um evento para o microserviço seguinte e assim sucessivamnete até a finalizacao da saga. 
+        </p>
+
+
+        <p>
+            A mesma lógica é aplicada em operacoes de compensação e roolback onde o serviço que falhou é obrigado a notificar o anterior e assim 
+            sucessivamnete até a finalizacao da saga. 
+        </p>
+        
+    </section>
+
+ 
+    
+    <section>
+        <h3>Referencias</h3>
+            <ol>
+                <li><a href="https://learn.microsoft.com/en-us/azure/architecture/patterns/saga">microsoft</a></li>
+            </ol>
+    </section>      
+
+    </body>
+
+
+</html>
