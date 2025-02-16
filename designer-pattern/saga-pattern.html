@@ -17,6 +17,22 @@
         locais onde cada serviço executa sua operação e inicia a proxima etapa por meio de eventos ou mensagens. Se uma etapa na 
         sequência falhar, a saga executa transações compensatórias para desfazer as etapas concluídas, mantendo a consistência dos dados.
     </p>
+    <p>
+        O termo Saga vem do sentido literal de Saga, que o conceito remete a uma aventura, uma história, uma jornada do herói, jornada na
+        qual a mesma remonta vários capítulos onde o “herói” precisa cumprir objetivos, enfrentar desafios, superar certos limites e concluir 
+        um objetivo predestinado. Dentro de uma implementação do Saga Pattern, uma Saga possui uma característica sequencial, na qual a 
+        transação depende de diversos microserviços para ser concluída, com etapas que devem ser executadas uma após a outra de forma ordenada 
+        e distribuída. Lembrando que a proposta do modelo Saga é garantir confiabilidade e consistencia não perfomance.
+    </p>
+
+    <h2>A Origem do Saga Pattern</h2>
+    
+    <p>O Saga Pattern foi publicado pela primeira vez por Hector Garcia-Molina e Kennth Salem, em 1987 em um artigo para o Departamento de 
+        Ciências da Computação da Universidade de Princeton, intitulado <a href="https://www.cs.cornell.edu/andru/cs711/2002fa/reading/sagas.pdf"> 
+        <strong>SAGAS</strong></a>. O objetivo do artigo é enfrentar a problematica das Long Live Transactions (LLTs) nos computadores da época, 
+        quando já se buscava uma forma de lidar com processos que demandavam mais tempo que as operações tradicionais e não podiam simplesmente
+        bloquear os recursos computacionais até sua conclusão.    
+    </p>
 
     <h2>O problema de lidar com transações distribuídas</h2>
 
