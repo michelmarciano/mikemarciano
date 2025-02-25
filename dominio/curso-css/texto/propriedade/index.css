@@ -1,0 +1,23 @@
+.propriedade-texto{
+    margin: 20px 0;
+}
+
+.propriedade-texto h3 {
+    font-weight: bold;
+    margin-bottom: 15px;
+}
+
+.propriedade-ftexto p {
+    line-height: 1.6;
+    margin-bottom: 20px;
+}
+
+/* Estilização específica para o CodePen embed */
+.propriedade-ftexto .codepen {
+    width: 100%;
+    max-width: 900px;
+    margin: 0 auto;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
