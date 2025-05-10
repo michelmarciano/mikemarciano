@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../../css/default.css">
+    <title>O Que é Docker?</title>
+</head>
+<body>
+    <h1>O que é docker?</h1>
+
+    <img src="../../assets/docker.png" alt="Docker" width="700px" height="400px">
+
+    <p>
+        Docker é uma plataforma de administração de contêineres que revolucionou a forma como desenvolvemos e implantamos aplicações. 
+        Trata-se de um serviço que gerencia contêineres de forma eficiente e padronizada.
+    </p>
+    
+    <p>
+        O Docker é baseado na tecnologia LXC (Linux Containers), que proporciona virtualização em nível de sistema operacional. 
+        Isso permite a execução de contêineres baseados em diferentes distribuições Linux, como Debian, Fedora e Ubuntu, 
+        de forma extremamente eficiente.
+    </p>
+    
+    <p>
+        Entre os principais benefícios do Docker, destacam-se:
+    </p>
+    
+    <ul>
+        <li>Isolamento completo de recursos (memória, CPU, rede e sistema de arquivos)</li>
+        <li>Alta eficiência na utilização de recursos do sistema</li>
+        <li>Portabilidade entre diferentes ambientes</li>
+        <li>Rápida inicialização e desligamento</li>
+        <li>Facilidade na gestão e escalabilidade de aplicações</li>
+    </ul>
+
+    <h2>Diferença entre contêineres e máquinas virtuais</h2>
+
+    <img src="../../assets/docker.jpg" alt="Docker">
+
+    <h2>O que são containers?</h2>
+
+    <p>
+        Containers são processos isolados que utilizam o kernel do sistema operacional hospedeiro (host). 
+        Eles são projetados para alcançar isolamento completo no nível de processo, garantindo que cada container 
+        opere de forma independente e segura.
+    </p>
+
+    <p>
+        Cada container possui seu próprio sistema de arquivos isolado, que é construído a partir de uma imagem. 
+        Uma imagem Docker é como um template ou blueprint que contém todas as instruções e arquivos necessários 
+        para criar um container. É possível ter diversos processos rodando dentro de um único container, como 
+        por exemplo:
+    </p>
+
+    <ul>
+        <li>Servidores de aplicação web</li>
+        <li>Bancos de dados</li>
+        <li>Serviços de cache</li>
+        <li>Ferramentas de monitoramento</li>
+    </ul>
+
+    <p>
+        Esta arquitetura permite uma grande flexibilidade na construção de aplicações, possibilitando a criação de ambientes 
+        complexos de forma organizada e escalável.
+    </p>
+
+    <h2>O que são imagens?</h2>
+
+    <p>
+        Uma imagem Docker é um modelo de sistema de arquivos somente leitura usado como base para criar containers. 
+        Cada container é uma instância executável de uma imagem, contendo todo o ambiente necessário para rodar uma aplicação.
+    </p>
+
+    <p>
+        As imagens podem ser criadas através do comando <code>docker build</code>, que utiliza um arquivo chamado Dockerfile 
+        contendo as instruções para sua construção. Após criadas, as imagens são armazenadas em repositórios dentro de um 
+        registry (como o Docker Hub), permitindo seu compartilhamento e distribuição.
+    </p>
+
+    <p>
+        Uma característica fundamental das imagens Docker é sua arquitetura em camadas (layers):
+    </p>
+
+    <ul>
+        <li>Cada imagem é composta por uma ou mais camadas sobrepostas</li>
+        <li>As camadas são imutáveis e podem ser compartilhadas entre diferentes imagens</li>
+        <li>O reuso de camadas otimiza o armazenamento e acelera o download de imagens</li>
+        <li>Novas imagens podem ser construídas aproveitando camadas de imagens existentes</li>
+    </ul>
+
+    <p>
+        Para gerenciar essas camadas, o Docker utiliza sistemas de arquivos especializados, sendo o mais comum o 
+        AUFS (Advanced Multi-Layered Unification Filesystem). Este sistema permite a união eficiente de múltiplas 
+        camadas em um único sistema de arquivos coerente.
+    </p>
+
+    <h2>Arquitetura Docker</h2>
+
+    <img src="../../assets/arquitetura-docker.png" alt="Arquitetura Docker">
+
+    <p>
+        A arquitetura do Docker é composta por diferentes componentes que trabalham em conjunto para 
+        fornecer a plataforma de containerização. Os principais componentes são:
+    </p>
+
+    <h3>Docker Daemon</h3>
+    <p>
+        O Docker Daemon, também conhecido como dockerd, é o servidor principal que gerencia todos os 
+        objetos Docker (imagens, containers, redes, volumes). Ele é responsável por:
+    </p>
+    <ul>
+        <li>Gerenciar containers e seus recursos</li>
+        <li>Construir e armazenar imagens</li>
+        <li>Gerenciar a comunicação com o Docker Registry</li>
+        <li>Processar as requisições da API Docker</li>
+    </ul>
+
+    <h3>Docker Client</h3>
+    <p>
+        O Docker Client é a interface principal pela qual os usuários interagem com o Docker. Ele pode se 
+        apresentar de diferentes formas:
+    </p>
+    <ul>
+        <li>CLI (Command Line Interface) - a forma mais comum de interação</li>
+        <li>Docker Desktop - interface gráfica oficial</li>
+        <li>APIs REST - para integração com aplicações</li>
+        <li>SDKs - para desenvolvimento de ferramentas personalizadas</li>
+    </ul>
+
+    <h3>Docker Registry</h3>
+    <p>
+        O Docker Registry é um serviço de armazenamento e distribuição de imagens Docker. O Docker Hub é 
+        o registry público oficial, mas existem também registries privados. Características principais:
+    </p>
+    <ul>
+        <li>Repositório centralizado de imagens</li>
+        <li>Sistema de tags para versionamento</li>
+        <li>Cache local de imagens para otimização</li>
+        <li>Suporte a múltiplos repositórios</li>
+    </ul>
+
+</body>
+</html>
+
+
