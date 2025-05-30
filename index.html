@@ -1,41 +1,290 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Mike Marciano</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&family=Roboto+Condensed:wght@700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
 <body>
-    <nav>
-        <ul>
-            <li><a href="./dominio/curso-dns/curso-dns.html">Curso DNS</a></li>
-        </ul>
-        <ul>
-            <li><a href="./dominio/designer-pattern/saga-pattern.html">SAGA</a></li>
-        </ul>
-        <ul>
-            <li><a href="./dominio/curso-css/seletores/index.html">CSS</a></li>
-            <li><a href="./dominio/curso-css/texto/texto-color/index.html">CSS - Texto</a></li> 
-        </ul>
+    <!-- Cabeçalho -->
+    <header class="header">
+        <div class="container">
 
-        <ul>
-            <li><a href="./dominio/arquitetura/fundamentos/disponibilidade.html">Disponibilidade</a></li>
-            <li><a href="./dominio/arquitetura/fundamentos/escalabilidade.html">Escalabilidade</a></li>
-            <li><a href="./dominio/arquitetura/fundamentos/integracao.html">Integração</a></li>
-            <li><a href="./dominio/arquitetura/fundamentos/observabilidade.html">Observabilidade</a></li>
-            <li><a href="./dominio/arquitetura/fundamentos/performance.html">Performance</a></li>
-            <li><a href="./dominio/arquitetura/fundamentos/seguranca.html">Segurança</a></li>
-            <li><a href="./dominio/arquitetura/fundamentos/teste.excalidraw">EXcalidraw</a></li>
+            <nav class="main-nav">
+                <button class="menu-toggle" aria-label="Abrir menu">
+                    <span class="hamburger"></span>
+                </button>
+                <ul class="nav-list">
+                    <li><a href="#" class="active">Home</a></li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle">Padrões de Arquitetura</a>
+                        <ul class="dropdown-menu">
+                            <li><a href="#saga-pattern">Saga Pattern</a></li>
+                            <li><a href="#eda">Event-Driven Architecture</a></li>
+                            <li><a href="#microservices">Microsserviços</a></li>
+                            <li><a href="#">CQRS</a></li>
+                            <li><a href="#">Domain-Driven Design</a></li>
+                        </ul>
+                    </li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle">Tecnologias</a>
+                        <ul class="dropdown-menu">
+                            <li><a href="#">Kafka</a></li>
+                            <li><a href="#">Docker</a></li>
+                            <li><a href="#">Kubernetes</a></li>
+                            <li><a href="#">API Gateway</a></li>
+                            <li><a href="#">Service Mesh</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="#">Eventos</a></li>
+                    <li><a href="#">Recursos</a></li>
+                    <li><a href="#">Contato</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
 
+    <!-- Hero Section -->
+    <!-- <section class="hero">
+        <div class="container">
+            <h1>Arquitetura de Software Moderna</h1>
+            <p>Conheça os principais padrões e conceitos que estão transformando o desenvolvimento de software</p>
+            <a href="#cards-section" class="btn btn-primary">Explorar Conceitos</a>
+        </div>
+    </section> -->
 
-        </ul>
-    </nav>
+    <!-- Cards Section -->
+    <section id="cards-section" class="cards-section">
+        <div class="container">
+            <h2 class="section-title">Artigos</h2>
+            <p class="section-description">Conheça os artigos que estao e destaque</p>
+            
+            <div class="cards-container">
+                <!-- Card 1: Saga Pattern -->
+                <div class="card" id="saga-pattern">
+                    <div class="card-image saga-pattern">
+                        <div class="image-overlay"></div>
+                    </div>
+                    <div class="card-content">
+                        <h3 class="card-title red-text">Saga Pattern</h3>
+                        <p class="card-description">
+                            Um padrão para gerenciar transações distribuídas em microsserviços, 
+                            garantindo consistência eventual através de uma sequência de transações locais.
+                        </p>
+                        <div class="card-actions">
+                            <button class="btn btn-outline btn-red card-flip-btn">Saiba mais</button>
+                            <div class="share-buttons">
+                                <button class="share-btn instagram" aria-label="Compartilhar no Instagram">
+                                    <i class="fab fa-instagram"></i>
+                                </button>
+                                <button class="share-btn linkedin" aria-label="Compartilhar no LinkedIn">
+                                    <i class="fab fa-linkedin-in"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-back">
+                        <h3 class="card-title red-text">Saga Pattern</h3>
+                        <ul class="card-details">
+                            <li><strong>Problema:</strong> Manter consistência em transações distribuídas</li>
+                            <li><strong>Solução:</strong> Sequência de transações locais com compensação</li>
+                            <li><strong>Tipos:</strong> Coreografia e Orquestração</li>
+                            <li><strong>Benefício:</strong> Consistência eventual em sistemas distribuídos</li>
+                        </ul>
+                        <button class="btn btn-outline btn-red card-flip-btn">Voltar</button>
+                    </div>
+                </div>
 
-    <div>
-        <p>Mike Marciano</p>
-        <p>Technical Blog</p>
+                <!-- Card 2: EDA -->
+                <div class="card" id="eda">
+                    <div class="card-image eda">
+                        <div class="image-overlay"></div>
+                    </div>
+                    <div class="card-content">
+                        <h3 class="card-title green-text">Event-Driven Architecture</h3>
+                        <p class="card-description">
+                            Arquitetura baseada na produção, detecção e consumo de eventos, 
+                            permitindo sistemas desacoplados e altamente escaláveis.
+                        </p>
+                        <div class="card-actions">
+                            <button class="btn btn-outline btn-green card-flip-btn">Saiba mais</button>
+                            <div class="share-buttons">
+                                <button class="share-btn instagram" aria-label="Compartilhar no Instagram">
+                                    <i class="fab fa-instagram"></i>
+                                </button>
+                                <button class="share-btn linkedin" aria-label="Compartilhar no LinkedIn">
+                                    <i class="fab fa-linkedin-in"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-back">
+                        <h3 class="card-title green-text">Event-Driven Architecture</h3>
+                        <ul class="card-details">
+                            <li><strong>Problema:</strong> Acoplamento entre serviços</li>
+                            <li><strong>Solução:</strong> Comunicação assíncrona via eventos</li>
+                            <li><strong>Componentes:</strong> Produtores, Consumidores, Event Broker</li>
+                            <li><strong>Benefício:</strong> Sistemas mais flexíveis e responsivos</li>
+                        </ul>
+                        <button class="btn btn-outline btn-green card-flip-btn">Voltar</button>
+                    </div>
+                </div>
 
-        <img src="https://live.staticflickr.com/65535/54305816080_0ecdc5d75e_n.jpg" alt="">
-    </div>
+                <!-- Card 3: Microsserviços -->
+                <div class="card" id="microservices">
+                    <div class="card-image microservices">
+                        <div class="image-overlay"></div>
+                    </div>
+                    <div class="card-content">
+                        <h3 class="card-title blue-text">Microsserviços</h3>
+                        <p class="card-description">
+                            Abordagem arquitetural que estrutura aplicações como uma coleção de serviços 
+                            independentes, cada um executando um processo específico de negócio.
+                        </p>
+                        <div class="card-actions">
+                            <button class="btn btn-outline btn-blue card-flip-btn">Saiba mais</button>
+                            <div class="share-buttons">
+                                <button class="share-btn instagram" aria-label="Compartilhar no Instagram">
+                                    <i class="fab fa-instagram"></i>
+                                </button>
+                                <button class="share-btn linkedin" aria-label="Compartilhar no LinkedIn">
+                                    <i class="fab fa-linkedin-in"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-back">
+                        <h3 class="card-title blue-text">Microsserviços</h3>
+                        <ul class="card-details">
+                            <li><strong>Problema:</strong> Monolitos complexos e difíceis de manter</li>
+                            <li><strong>Solução:</strong> Serviços pequenos e independentes</li>
+                            <li><strong>Características:</strong> Implantação independente, APIs bem definidas</li>
+                            <li><strong>Benefício:</strong> Escalabilidade, resiliência e agilidade</li>
+                        </ul>
+                        <button class="btn btn-outline btn-blue card-flip-btn">Voltar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Recursos Section -->
+    <section class="resources-section">
+        <div class="container">
+            <h2 class="section-title">Recursos Adicionais</h2>
+            <div class="resources-grid">
+                <div class="resource-item">
+                    <div class="resource-icon red-bg">
+                        <i class="fas fa-book"></i>
+                    </div>
+                    <h3>Artigos</h3>
+                    <p>Leia artigos detalhados sobre padrões arquiteturais e melhores práticas.</p>
+                    <a href="#" class="resource-link">Ver artigos</a>
+                </div>
+                <div class="resource-item">
+                    <div class="resource-icon blue-bg">
+                        <i class="fas fa-video"></i>
+                    </div>
+                    <h3>Vídeos</h3>
+                    <p>Assista tutoriais e palestras sobre implementação de arquiteturas modernas.</p>
+                    <a href="#" class="resource-link">Ver vídeos</a>
+                </div>
+                <div class="resource-item">
+                    <div class="resource-icon green-bg">
+                        <i class="fas fa-code"></i>
+                    </div>
+                    <h3>Exemplos de Código</h3>
+                    <p>Acesse repositórios com exemplos práticos de implementação.</p>
+                    <a href="#" class="resource-link">Ver exemplos</a>
+                </div>
+                <div class="resource-item">
+                    <div class="resource-icon yellow-bg">
+                        <i class="fas fa-calendar-alt"></i>
+                    </div>
+                    <h3>Eventos</h3>
+                    <p>Participe de webinars e conferências sobre arquitetura de software.</p>
+                    <a href="#" class="resource-link">Ver agenda</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Newsletter Section -->
+    <!-- <section class="newsletter-section">
+        <div class="container">
+            <h2>Fique por dentro das novidades</h2>
+            <p>Receba atualizações sobre novos conteúdos e eventos</p>
+            <form class="newsletter-form">
+                <input type="email" placeholder="Seu e-mail" required>
+                <button type="submit" class="btn btn-primary">Inscrever-se</button>
+            </form>
+        </div>
+    </section> -->
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-logo">
+                    <span class="logo-text"><span class="blue">Arq</span><span class="red">ui</span><span class="yellow">te</span><span class="green">tura</span></span>
+                    <p>Compartilhando conhecimento sobre arquitetura de software</p>
+                </div>
+                <div class="footer-links">
+                    <div class="footer-column">
+                        <h4>Navegação</h4>
+                        <ul>
+                            <li><a href="#">Home</a></li>
+                            <li><a href="#">Padrões</a></li>
+                            <li><a href="#">Tecnologias</a></li>
+                            <li><a href="#">Recursos</a></li>
+                        </ul>
+                    </div>
+                    <div class="footer-column">
+                        <h4>Recursos</h4>
+                        <ul>
+                            <li><a href="#">Artigos</a></li>
+                            <li><a href="#">Vídeos</a></li>
+                            <li><a href="#">Exemplos</a></li>
+                            <li><a href="#">Eventos</a></li>
+                        </ul>
+                    </div>
+                    <div class="footer-column">
+                        <h4>Contato</h4>
+                        <ul>
+                            <li><a href="#">Sobre nós</a></li>
+                            <li><a href="#">Fale conosco</a></li>
+                            <li><a href="#">Política de privacidade</a></li>
+                            <li><a href="#">Termos de uso</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-social">
+                <h4>Compartilhe nas redes sociais</h4>
+                <div class="social-buttons">
+                    <a href="#" class="social-btn instagram" aria-label="Instagram">
+                        <i class="fab fa-instagram"></i>
+                    </a>
+                    <a href="#" class="social-btn linkedin" aria-label="LinkedIn">
+                        <i class="fab fa-linkedin-in"></i>
+                    </a>
+                    <a href="#" class="social-btn twitter" aria-label="Twitter">
+                        <i class="fab fa-twitter"></i>
+                    </a>
+                    <a href="#" class="social-btn facebook" aria-label="Facebook">
+                        <i class="fab fa-facebook-f"></i>
+                    </a>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 Arquitetura de Software. Todos os direitos reservados.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
 </body>
 </html>

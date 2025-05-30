@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../../../css/default.css">
+    <link rel="stylesheet" href="saga-coreografado.css">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible+Next:ital,wght@0,200..800;1,200..800&display=swap" rel="stylesheet">
+    
+<title>Saga Pattern</title>
+</head>
+<body>
+    <h1>Saga</h1>
+
+    <img src="https://live.staticflickr.com/65535/54304198436_d6540294c3_z.jpg" alt="">
+   
+        <h2>O que é modelo Saga Pattern?</h2>
+
+        <p> O padrão arquitetural Saga ajuda a manter a consistência dos dados em sistemas distribuidos, uma saga é uma sequência de transações 
+            locais onde cada serviço executa sua operação e inicia a proxima etapa por meio de eventos ou mensagens. Se uma etapa na 
+            sequência falhar, a saga executa transações compensatórias para desfazer as etapas concluídas, mantendo a consistência dos dados.
+        </p>
+        <p>
+            O termo Saga vem do sentido literal de Saga, que o conceito remete a uma aventura, uma história, uma jornada do herói, jornada na
+            qual a mesma remonta vários capítulos onde o “herói” precisa cumprir objetivos, enfrentar desafios, superar certos limites e concluir 
+            um objetivo predestinado. Dentro de uma implementação do Saga Pattern, uma Saga possui uma característica sequencial, na qual a 
+            transação depende de diversos microserviços para ser concluída, com etapas que devem ser executadas uma após a outra de forma ordenada 
+            e distribuída. Lembrando que a proposta do modelo Saga é garantir confiabilidade e consistencia não perfomance.
+        </p>
+        
+        <h2>A Origem do Saga Pattern</h2>
+        
+        <p>O Saga Pattern foi publicado pela primeira vez por Hector Garcia-Molina e Kennth Salem, em 1987 em um artigo para o Departamento de 
+            Ciências da Computação da Universidade de Princeton, intitulado <a href="https://www.cs.cornell.edu/andru/cs711/2002fa/reading/sagas.pdf"> 
+            <strong>SAGAS</strong></a>. O objetivo do artigo é enfrentar a problematica das Long Live Transactions (LLTs) nos computadores da época, 
+            quando já se buscava uma forma de lidar com processos que demandavam mais tempo que as operações tradicionais e não podiam simplesmente
+            bloquear os recursos computacionais até sua conclusão.    
+        </p>
+
+        <h2>O problema de lidar com transações distribuídas</h2>
+
+        <p>
+            Uma transação é basicamente uma sequência de operações que acontecem em multiplos sistemas para ser concluída. Por definição visa garantir que 
+            todas sejam executadas, ou nenhuma, caso uma das operações falhe. Uma transação se torna distribuida quando ativa operações em vários 
+            servidores diferentes
+        </p>
+
+
+        <h2>O problema de lidar com transações longas</h2>
+
+        <p>
+            Em diversos cenários, processos complexos exigem um periodo um pouco mais longo para serem concluidos em sua totalidade, 
+            podendo aumentar o risco de falhas, por exemplo uma transação pra reservar uma viagem, que consiste em reservar um voo, 
+            um carro alugado e um hotel, o tempo de espera da execução pode levar desde milissegundos até dias para ser finalizada 
+            completamente.
+        </p>
+        
+        <section>
+            <h2>Modelo Coreografado </h2>
+
+            <h1>Exemplo de Padrão Saga - E-commerce</h1>
+            <div class="saga-container">
+                <div id="criar-pedido" class="step pending">
+                    <h2>1. Pedido</h2>
+                    <p>Status: Pendente</p>
+                    <div class="step-icon">
+                        <div class="icon-normal">📋</div>
+                        <div class="icon-success">✅</div>
+                        <div class="icon-failed">❌</div>
+                        <div class="icon-compensating">↩️</div>
+                    </div>
+                </div>
+                <div id="processar-pagamento" class="step pending">
+                    <h2>2. Pagamento</h2>
+                    <p>Status: Pendente</p>
+                    <div class="step-icon">
+                        <div class="icon-normal">💳</div>
+                        <div class="icon-success">✅</div>
+                        <div class="icon-failed">❌</div>
+                        <div class="icon-compensating">↩️</div>
+                    </div>
+                </div>
+                <div id="verificar-estoque" class="step pending">
+                    <h2>3. Estoque</h2>
+                    <p>Status: Pendente</p>
+                    <div class="step-icon">
+                        <div class="icon-normal">📦</div>
+                        <div class="icon-success">✅</div>
+                        <div class="icon-failed">❌</div>
+                        <div class="icon-compensating">↩️</div>
+                    </div>
+                </div>
+                <div id="realizar-entrega" class="step pending">
+                    <h2>4. Entrega</h2>
+                    <p>Status: Pendente</p>
+                    <div class="step-icon">
+                        <div class="icon-normal">🚚</div>
+                        <div class="icon-success">✅</div>
+                        <div class="icon-failed">❌</div>
+                        <div class="icon-compensating">↩️</div>
+                    </div>
+                </div>
+            </div>
+            <div class="controls">
+                <button id="start-saga">Iniciar Saga</button>
+                <button id="start-saga-fail-payment">Falha no Pagamento</button>
+                <button id="start-saga-fail-stock">Falha no Estoque</button>
+                <button id="start-saga-fail-delivery">Falha na Entrega</button>
+                <button id="reset-saga">Resetar</button>
+            </div>
+            <div id="saga-status">
+                <p>Status Geral: Pronto para iniciar</p>
+            </div>
+            
+            <div id="transaction-container"></div>
+        
+            <script src="saga-coreografado.js"></script>
+
+            <p>
+                O modelo Coreografado propõe que o microservico deve conhecer o serviço seguinte e o anterior, quando um microserviço é
+                chamado ele executa seu processo e encaminha um evento para o microserviço seguinte e assim sucessivamnete até a finalizacao da saga. 
+            </p>
+
+
+            <p>
+                A mesma lógica é aplicada em operacoes de compensação e roolback onde o serviço que falhou é obrigado a notificar o anterior e assim 
+                sucessivamnete até a finalizacao da saga. 
+            </p>
+
+            <h2>Quando Usar?</h2>    
+             
+            <ul>
+                <li>Estratégia bastante recomendada para aquitetura que está em estágio inicial de desenvolvimento, evita a 
+                    necessidade de manter mais um serviço de orquestração e não tem retrabalho de Implementação devido ao novo 
+                    surgiento da arquitetura.
+                </li>
+            </ul>
+
+
+            <h2>Vantagens </h2>
+
+            <ul>
+                <li>
+                    Não há necessidade de manter mais um serviço
+                </li>
+
+                <li>
+                    Excelente para arquiteturas ou fluxos de transações pequenas, que não envolvam muitos servicos.
+                </li>
+
+                <li>
+                    É preferencial que seja implementado caso a arquitetura esteja nascendo, onde os fluxos ainda nao estão definidos e envolvendo 
+                    vários serviços.
+                </li>
+            </ul>
+
+            <h2>Desvantagens </h2>
+
+            <ul>
+                <li> 
+                    Maior complexidade para entender e manter a lógica conforme ocorra um grande cresciento do fluxo de transações.
+                </li>
+
+                <li> 
+                    Os microservicos não são independentes, eles precisam conhecer quem ven antes ou depois no fluxo de execução.
+                </li>
+                <li> 
+                    Pode ser mais complexo de ser testado devido o conhecimento geral dos microsserviços envolvidos.
+                </li>
+            </ul>
+            
+        </section>
+
+        <section>
+            <h2>Modelo Orquestrado </h2>
+
+            <p>
+                O modelo Orquestrado           
+            </p>
+
+            <h2>Quando Usar?</h2>     
+            <ul>
+                <li>Estratégia bastante recomendada para aquitetura já existente de microserviços que ainda não utilize saga e que possua
+                    vários serviços implamentados, pois acopla toda a lógica de orquestração e apenas um local.
+                </li>
+            </ul>
+
+            <h2>Vantagens </h2>
+
+            <ul>
+                <li>
+                    Toda a lógica da saga fica em apenas um local centralizado, diinuindo a possibilidade de falhas em relação à orquestração 
+                    dos eventos.
+                </li>
+                <li>
+                    Maior testabilidade dos fluxos.
+                </li>
+                <li>
+                    Os microserviços envolvidos são totalmente independentes, não possuem o minimo de conhecimento sobre a orquestração, facilitando
+                    na implementação e compreensão dos fluxo unitariamente.
+                </li>
+            </ul>   
+
+            <h2>Desvantagens </h2>
+
+            <ul>
+                <li> ]
+                    <strong> Único ponto de falha:</strong> o orquestrador pode se tornar um ponto único de falha porque coordena toda a transação. 
+                    Em alguns casos, o padrão de coreografia da saga é preferido por causa dessa questão.
+                </li>
+            </ul>
+            
+        </section>
+
+
+        <h2>Quando usar?</h2>     
+        <ul>
+            <li>Seu sistema exige integridade e consistência de dados em transações distribuídas que abrangem vários repositórios de dados.</li>
+        </ul>
+
+    
+        
+        <section>
+            <h3>Referencias</h3>
+                <ul>
+                    <li><a href="https://learn.microsoft.com/en-us/azure/architecture/patterns/saga">microsoft</a></li>
+                </ul>
+        </section>      
+
+        </body>
+
+</html>

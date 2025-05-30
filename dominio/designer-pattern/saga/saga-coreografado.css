@@ -1,0 +1,343 @@
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #f5f5f5;
+    color: #333;
+}
+
+h1 {
+    text-align: center;
+    color: #2c3e50;
+    margin-bottom: 30px;
+}
+
+.saga-container {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 30px;
+    position: relative;
+    flex-wrap: wrap;
+}
+
+.saga-container::before {
+    content: '';
+    position: absolute;
+    top: 50px;
+    left: 5%;
+    right: 5%;
+    height: 4px;
+    background-color: #ddd;
+    z-index: 0;
+}
+
+.step {
+    background-color: white;
+    border-radius: 8px;
+    padding: 15px;
+    width: 22%;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    position: relative;
+    z-index: 1;
+    transition: all 0.5s ease;
+    margin-bottom: 15px;
+}
+
+.step h2 {
+    margin-top: 0;
+    font-size: 1.2rem;
+    color: #2c3e50;
+}
+
+.step p {
+    margin-bottom: 10px;
+}
+
+/* Ícones de status */
+.step-icon {
+    text-align: center;
+    font-size: 24px;
+    margin-top: 10px;
+}
+
+.icon-normal, .icon-success, .icon-failed, .icon-compensating {
+    display: none;
+    transition: all 0.5s ease;
+}
+
+/* Estados das etapas */
+.pending {
+    border-left: 5px solid #95a5a6;
+}
+
+.pending .icon-normal {
+    display: block;
+}
+
+.processing {
+    border-left: 5px solid #3498db;
+    animation: pulse 1.5s infinite;
+}
+
+.processing .icon-normal {
+    display: block;
+    animation: spin 2s infinite linear;
+}
+
+.success {
+    border-left: 5px solid #2ecc71;
+}
+
+.success .icon-success {
+    display: block;
+    animation: pop 0.5s ease;
+}
+
+.failed {
+    border-left: 5px solid #e74c3c;
+    animation: shake 0.5s ease;
+}
+
+.failed .icon-failed {
+    display: block;
+    animation: pop 0.5s ease;
+}
+
+.compensating {
+    border-left: 5px solid #f39c12;
+    animation: pulse-warning 1.5s infinite;
+}
+
+.compensating .icon-compensating {
+    display: block;
+    animation: spin-reverse 1s infinite linear;
+}
+
+/* Animações */
+@keyframes pulse {
+    0% {
+        box-shadow: 0 0 0 0 rgba(52, 152, 219, 0.4);
+    }
+    70% {
+        box-shadow: 0 0 0 10px rgba(52, 152, 219, 0);
+    }
+    100% {
+        box-shadow: 0 0 0 0 rgba(52, 152, 219, 0);
+    }
+}
+
+@keyframes pulse-warning {
+    0% {
+        box-shadow: 0 0 0 0 rgba(243, 156, 18, 0.4);
+    }
+    70% {
+        box-shadow: 0 0 0 10px rgba(243, 156, 18, 0);
+    }
+    100% {
+        box-shadow: 0 0 0 0 rgba(243, 156, 18, 0);
+    }
+}
+
+@keyframes shake {
+    0%, 100% { transform: translateX(0); }
+    10%, 30%, 50%, 70%, 90% { transform: translateX(-5px); }
+    20%, 40%, 60%, 80% { transform: translateX(5px); }
+}
+
+@keyframes pop {
+    0% { transform: scale(0.8); opacity: 0.5; }
+    50% { transform: scale(1.2); }
+    100% { transform: scale(1); opacity: 1; }
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+@keyframes spin-reverse {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(-360deg); }
+}
+
+.controls {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-bottom: 20px;
+    flex-wrap: wrap;
+}
+
+button {
+    padding: 10px 15px;
+    border: none;
+    border-radius: 4px;
+    background-color: #3498db;
+    color: white;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    margin-bottom: 5px;
+}
+
+button:hover {
+    background-color: #2980b9;
+}
+
+button:disabled {
+    background-color: #95a5a6;
+    cursor: not-allowed;
+}
+
+#saga-status {
+    background-color: white;
+    padding: 15px;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    margin-top: 20px;
+    text-align: center;
+    font-weight: bold;
+}
+
+/* Container para efeitos de transação */
+#transaction-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 100;
+}
+
+/* Efeitos de transação */
+.transaction-effect {
+    position: absolute;
+    width: 30px;
+    height: 30px;
+    background-color: #3498db;
+    border-radius: 50%;
+    z-index: 2;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 16px;
+    animation: moveTransaction 1.5s linear forwards;
+}
+
+@keyframes moveTransaction {
+    0% {
+        transform: translateX(0) scale(1);
+        opacity: 1;
+    }
+    100% {
+        transform: translateX(200px) scale(0.5);
+        opacity: 0;
+    }
+}
+
+/* Efeitos de compensação */
+.compensation-effect {
+    position: absolute;
+    width: 30px;
+    height: 30px;
+    background-color: #e74c3c;
+    border-radius: 50%;
+    z-index: 2;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 16px;
+    animation: moveCompensation 1.5s linear forwards;
+}
+
+@keyframes moveCompensation {
+    0% {
+        transform: translateX(200px) scale(0.5);
+        opacity: 0;
+    }
+    100% {
+        transform: translateX(0) scale(1);
+        opacity: 1;
+    }
+}
+
+/* Efeito de cancelamento */
+.cancel-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(231, 76, 60, 0.2);
+    z-index: 1;
+    border-radius: 8px;
+    opacity: 0;
+    pointer-events: none;
+}
+
+.failed .cancel-overlay, .compensating .cancel-overlay {
+    opacity: 1;
+    animation: fadeIn 0.5s ease;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+/* Linha de cancelamento */
+.cancel-line {
+    position: absolute;
+    height: 3px;
+    background-color: #e74c3c;
+    top: 50%;
+    left: 0;
+    right: 0;
+    transform: scaleX(0);
+    transform-origin: left;
+    z-index: 3;
+}
+
+.failed .cancel-line {
+    animation: drawLine 0.5s ease forwards;
+}
+
+@keyframes drawLine {
+    from { transform: scaleX(0); }
+    to { transform: scaleX(1); }
+}
+
+/* Responsividade */
+@media (max-width: 900px) {
+    .saga-container {
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    .saga-container::before {
+        top: 0;
+        bottom: 0;
+        left: 50%;
+        right: auto;
+        width: 4px;
+        height: 85%;
+    }
+    
+    .step {
+        width: 80%;
+        margin-bottom: 20px;
+    }
+    
+    .controls {
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    button {
+        width: 100%;
+        max-width: 250px;
+    }
+}

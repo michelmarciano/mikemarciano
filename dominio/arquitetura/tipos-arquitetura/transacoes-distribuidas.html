@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../../../../css/default.css">
+    <title>Transações Distribuídas</title>
+</head>
+<body>
+    <h1>Transações Distribuídas</h1>
+
+    <h2>Conceito e Definição</h2>
+    <p>
+        Transações distribuídas são operações que envolvem múltiplos microserviços, onde o início e o término da transação 
+        ocorrem em serviços diferentes. Este conceito é fundamental em arquiteturas de microserviços, pois permite a 
+        coordenação de operações entre diferentes componentes do sistema.
+    </p>
+
+    <h2>Diferença entre Transações Distribuídas e Transações de Banco de Dados</h2>
+    <p>
+        É importante distinguir transações distribuídas de transações tradicionais de banco de dados:
+    </p>
+
+    <h3>Transações de Banco de Dados</h3>
+    <p>
+        Uma transação em banco de dados é um processo atômico que executa múltiplas operações de leitura e escrita, 
+        garantindo a consistência dos dados através dos princípios ACID (Atomicidade, Consistência, Isolamento e 
+        Durabilidade). Todas as operações são executadas como uma unidade indivisível - ou todas são aplicadas com 
+        sucesso, ou nenhuma é aplicada.
+    </p>
+
+    <h3>Transações Distribuídas</h3>
+    <p>
+        Em contraste, transações distribuídas em microserviços são mais complexas e não seguem estritamente os 
+        princípios ACID. Elas são implementadas através de padrões e mecanismos específicos que garantem a 
+        consistência eventual entre os serviços envolvidos. Esta abordagem é necessária devido à natureza 
+        distribuída e independente dos microserviços.
+    </p>
+
+    <h2>Desafios e Considerações</h2>
+    <p>
+        A implementação de transações distribuídas apresenta diversos desafios:
+    </p>
+    <ul>
+        <li>Garantia de consistência entre múltiplos serviços</li>
+        <li>Gerenciamento de falhas e recuperação</li>
+        <li>Latência na comunicação entre serviços</li>
+        <li>Complexidade na coordenação das operações</li>
+    </ul>
+
+    <h2>Padrões de Implementação</h2>
+    <p>
+        Existem diversos padrões arquiteturais para implementar transações distribuídas em microserviços:
+    </p>
+    <ul>
+        <li>Saga Pattern</li>
+        <li>Event Sourcing</li>
+        <li>Two-Phase Commit (2PC)</li>
+        <li>Outbox Pattern</li>
+    </ul>
+</body>
+</html>

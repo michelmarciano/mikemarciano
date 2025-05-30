@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../../../css/default.css">
+    <title>Two-Phase Commit (2PC)</title>
+</head>
+<body>
+    <h1>Two-Phase Commit (2PC)</h1>
+
+    <h2>Visão Geral</h2>
+    <p>
+        O Two-Phase Commit (2PC) é um protocolo de consenso distribuído fundamental para garantir a atomicidade 
+        em transações distribuídas. Este protocolo assegura que uma transação seja confirmada em todos os nós 
+        participantes ou abortada em todos eles, mantendo assim a consistência dos dados em sistemas distribuídos.
+    </p>
+
+    <h2>Princípios Fundamentais</h2>
+    <h3>Atomicidade</h3>
+    <p>
+        O 2PC garante a atomicidade das transações distribuídas, assegurando que todas as operações sejam 
+        concluídas com sucesso ou que nenhuma delas seja aplicada. Este princípio é crucial para manter a 
+        integridade dos dados em ambientes distribuídos.
+    </p>
+
+    <h2>Fases do Protocolo</h2>
+    <p>
+        O protocolo 2PC opera em duas fases distintas:
+    </p>
+
+    <h3>1. Fase de Preparação (Prepare)</h3>
+    <p>
+        Nesta fase inicial:
+    </p>
+    <ul>
+        <li>O coordenador envia uma mensagem de preparação para todos os participantes</li>
+        <li>Cada participante executa as operações locais necessárias</li>
+        <li>Os participantes respondem ao coordenador com seu voto (preparado ou abortar)</li>
+    </ul>
+
+    <h3>2. Fase de Compromisso (Commit)</h3>
+    <p>
+        Na segunda fase:
+    </p>
+    <ul>
+        <li>Se todos os participantes votarem "preparado", o coordenador envia uma mensagem de commit</li>
+        <li>Se qualquer participante votar "abortar" ou não responder, a transação é abortada</li>
+        <li>Os participantes executam a decisão final (commit ou abort)</li>
+    </ul>
+
+    <h2>Características e Considerações</h2>
+
+    <h3>Vantagens</h3>
+    <ul>
+        <li>Garantia de consistência de dados em sistemas distribuídos</li>
+        <li>Gestão eficiente de transações envolvendo múltiplos nós</li>
+        <li>Protocolo bem estabelecido e amplamente utilizado</li>
+    </ul>
+
+    <h3>Desvantagens</h3>
+    <ul>
+        <li>Potenciais problemas de desempenho em sistemas com muitos participantes</li>
+        <li>Coordenador como ponto único de falha</li>
+        <li>Complexidade na implementação e manutenção</li>
+        <li>Latência adicional devido às duas fases de comunicação</li>
+    </ul>
+
+    <h2>Alternativas e Evolução</h2>
+    <p>
+        Devido às suas limitações, especialmente em termos de escalabilidade e desempenho, o 2PC tem sido 
+        complementado ou substituído por alternativas mais modernas em muitos cenários:
+    </p>
+    <ul>
+        <li>Padrão Saga para transações distribuídas</li>
+        <li>Event Sourcing para gerenciamento de estado</li>
+        <li>Outbox Pattern para comunicação entre serviços</li>
+    </ul>
+
+    <h2>Conclusão</h2>
+    <p>
+        O Two-Phase Commit continua sendo uma ferramenta importante para garantir a consistência de dados 
+        em sistemas distribuídos. No entanto, é crucial avaliar cuidadosamente seus trade-offs e considerar 
+        alternativas mais modernas quando a escalabilidade e o desempenho são prioridades críticas.
+    </p>
+</body>
+</html>
