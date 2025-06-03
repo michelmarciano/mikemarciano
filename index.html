@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mike Marciano</title>
+    <title>Arquitetura de Software - Padrões e Conceitos</title>
     <link rel="stylesheet" href="styles.css">
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&family=Roboto+Condensed:wght@700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
@@ -12,7 +12,9 @@
     <!-- Cabeçalho -->
     <header class="header">
         <div class="container">
-
+            <div class="logo">
+                <span class="logo-text"><span class="blue">Arq</span><span class="red">ui</span><span class="yellow">te</span><span class="green">tura</span></span>
+            </div>
             <nav class="main-nav">
                 <button class="menu-toggle" aria-label="Abrir menu">
                     <span class="hamburger"></span>
@@ -48,124 +50,149 @@
     </header>
 
     <!-- Hero Section -->
-    <!-- <section class="hero">
+    <section class="hero">
         <div class="container">
             <h1>Arquitetura de Software Moderna</h1>
             <p>Conheça os principais padrões e conceitos que estão transformando o desenvolvimento de software</p>
-            <a href="#cards-section" class="btn btn-primary">Explorar Conceitos</a>
+            <a href="#carousel-section" class="btn btn-primary">Explorar Conceitos</a>
         </div>
-    </section> -->
+    </section>
 
-    <!-- Cards Section -->
-    <section id="cards-section" class="cards-section">
+    <!-- Carousel Section -->
+    <section id="carousel-section" class="carousel-section">
         <div class="container">
-            <h2 class="section-title">Artigos</h2>
-            <p class="section-description">Conheça os artigos que estao e destaque</p>
+            <h2 class="section-title">Padrões Arquiteturais</h2>
+            <p class="section-description">Conheça os principais padrões utilizados em arquiteturas modernas</p>
             
-            <div class="cards-container">
-                <!-- Card 1: Saga Pattern -->
-                <div class="card" id="saga-pattern">
-                    <div class="card-image saga-pattern">
-                        <div class="image-overlay"></div>
-                    </div>
-                    <div class="card-content">
-                        <h3 class="card-title red-text">Saga Pattern</h3>
-                        <p class="card-description">
-                            Um padrão para gerenciar transações distribuídas em microsserviços, 
-                            garantindo consistência eventual através de uma sequência de transações locais.
-                        </p>
-                        <div class="card-actions">
-                            <button class="btn btn-outline btn-red card-flip-btn">Saiba mais</button>
-                            <div class="share-buttons">
-                                <button class="share-btn instagram" aria-label="Compartilhar no Instagram">
-                                    <i class="fab fa-instagram"></i>
-                                </button>
-                                <button class="share-btn linkedin" aria-label="Compartilhar no LinkedIn">
-                                    <i class="fab fa-linkedin-in"></i>
-                                </button>
+            <div class="carousel-container">
+                <div class="carousel-track-container">
+                    <ul class="carousel-track">
+                        <!-- Card 1: Saga Pattern -->
+                        <li class="carousel-slide" id="saga-pattern">
+                            <div class="card">
+                                <div class="card-image saga-pattern">
+                                    <div class="image-overlay"></div>
+                                </div>
+                                <div class="card-content">
+                                    <h3 class="card-title red-text">Saga Pattern</h3>
+                                    <p class="card-description">
+                                        Um padrão para gerenciar transações distribuídas em microsserviços, 
+                                        garantindo consistência eventual através de uma sequência de transações locais.
+                                    </p>
+                                    <div class="card-actions">
+                                        <button class="btn btn-outline btn-red card-flip-btn">Saiba mais</button>
+                                        <div class="share-buttons">
+                                            <button class="share-btn instagram" aria-label="Compartilhar no Instagram">
+                                                <i class="fab fa-instagram"></i>
+                                            </button>
+                                            <button class="share-btn linkedin" aria-label="Compartilhar no LinkedIn">
+                                                <i class="fab fa-linkedin-in"></i>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="card-back">
+                                    <h3 class="card-title red-text">Saga Pattern</h3>
+                                    <ul class="card-details">
+                                        <li><strong>Problema:</strong> Manter consistência em transações distribuídas</li>
+                                        <li><strong>Solução:</strong> Sequência de transações locais com compensação</li>
+                                        <li><strong>Tipos:</strong> Coreografia e Orquestração</li>
+                                        <li><strong>Benefício:</strong> Consistência eventual em sistemas distribuídos</li>
+                                    </ul>
+                                    <button class="btn btn-outline btn-red card-flip-btn">Voltar</button>
+                                </div>
                             </div>
-                        </div>
-                    </div>
-                    <div class="card-back">
-                        <h3 class="card-title red-text">Saga Pattern</h3>
-                        <ul class="card-details">
-                            <li><strong>Problema:</strong> Manter consistência em transações distribuídas</li>
-                            <li><strong>Solução:</strong> Sequência de transações locais com compensação</li>
-                            <li><strong>Tipos:</strong> Coreografia e Orquestração</li>
-                            <li><strong>Benefício:</strong> Consistência eventual em sistemas distribuídos</li>
-                        </ul>
-                        <button class="btn btn-outline btn-red card-flip-btn">Voltar</button>
-                    </div>
-                </div>
+                        </li>
 
-                <!-- Card 2: EDA -->
-                <div class="card" id="eda">
-                    <div class="card-image eda">
-                        <div class="image-overlay"></div>
-                    </div>
-                    <div class="card-content">
-                        <h3 class="card-title green-text">Event-Driven Architecture</h3>
-                        <p class="card-description">
-                            Arquitetura baseada na produção, detecção e consumo de eventos, 
-                            permitindo sistemas desacoplados e altamente escaláveis.
-                        </p>
-                        <div class="card-actions">
-                            <button class="btn btn-outline btn-green card-flip-btn">Saiba mais</button>
-                            <div class="share-buttons">
-                                <button class="share-btn instagram" aria-label="Compartilhar no Instagram">
-                                    <i class="fab fa-instagram"></i>
-                                </button>
-                                <button class="share-btn linkedin" aria-label="Compartilhar no LinkedIn">
-                                    <i class="fab fa-linkedin-in"></i>
-                                </button>
+                        <!-- Card 2: EDA -->
+                        <li class="carousel-slide" id="eda">
+                            <div class="card">
+                                <div class="card-image eda">
+                                    <div class="image-overlay"></div>
+                                </div>
+                                <div class="card-content">
+                                    <h3 class="card-title green-text">Event-Driven Architecture</h3>
+                                    <p class="card-description">
+                                        Arquitetura baseada na produção, detecção e consumo de eventos, 
+                                        permitindo sistemas desacoplados e altamente escaláveis.
+                                    </p>
+                                    <div class="card-actions">
+                                        <button class="btn btn-outline btn-green card-flip-btn">Saiba mais</button>
+                                        <div class="share-buttons">
+                                            <button class="share-btn instagram" aria-label="Compartilhar no Instagram">
+                                                <i class="fab fa-instagram"></i>
+                                            </button>
+                                            <button class="share-btn linkedin" aria-label="Compartilhar no LinkedIn">
+                                                <i class="fab fa-linkedin-in"></i>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="card-back">
+                                    <h3 class="card-title green-text">Event-Driven Architecture</h3>
+                                    <ul class="card-details">
+                                        <li><strong>Problema:</strong> Acoplamento entre serviços</li>
+                                        <li><strong>Solução:</strong> Comunicação assíncrona via eventos</li>
+                                        <li><strong>Componentes:</strong> Produtores, Consumidores, Event Broker</li>
+                                        <li><strong>Benefício:</strong> Sistemas mais flexíveis e responsivos</li>
+                                    </ul>
+                                    <button class="btn btn-outline btn-green card-flip-btn">Voltar</button>
+                                </div>
                             </div>
-                        </div>
-                    </div>
-                    <div class="card-back">
-                        <h3 class="card-title green-text">Event-Driven Architecture</h3>
-                        <ul class="card-details">
-                            <li><strong>Problema:</strong> Acoplamento entre serviços</li>
-                            <li><strong>Solução:</strong> Comunicação assíncrona via eventos</li>
-                            <li><strong>Componentes:</strong> Produtores, Consumidores, Event Broker</li>
-                            <li><strong>Benefício:</strong> Sistemas mais flexíveis e responsivos</li>
-                        </ul>
-                        <button class="btn btn-outline btn-green card-flip-btn">Voltar</button>
-                    </div>
-                </div>
+                        </li>
 
-                <!-- Card 3: Microsserviços -->
-                <div class="card" id="microservices">
-                    <div class="card-image microservices">
-                        <div class="image-overlay"></div>
-                    </div>
-                    <div class="card-content">
-                        <h3 class="card-title blue-text">Microsserviços</h3>
-                        <p class="card-description">
-                            Abordagem arquitetural que estrutura aplicações como uma coleção de serviços 
-                            independentes, cada um executando um processo específico de negócio.
-                        </p>
-                        <div class="card-actions">
-                            <button class="btn btn-outline btn-blue card-flip-btn">Saiba mais</button>
-                            <div class="share-buttons">
-                                <button class="share-btn instagram" aria-label="Compartilhar no Instagram">
-                                    <i class="fab fa-instagram"></i>
-                                </button>
-                                <button class="share-btn linkedin" aria-label="Compartilhar no LinkedIn">
-                                    <i class="fab fa-linkedin-in"></i>
-                                </button>
+                        <!-- Card 3: Microsserviços -->
+                        <li class="carousel-slide" id="microservices">
+                            <div class="card">
+                                <div class="card-image microservices">
+                                    <div class="image-overlay"></div>
+                                </div>
+                                <div class="card-content">
+                                    <h3 class="card-title blue-text">Microsserviços</h3>
+                                    <p class="card-description">
+                                        Abordagem arquitetural que estrutura aplicações como uma coleção de serviços 
+                                        independentes, cada um executando um processo específico de negócio.
+                                    </p>
+                                    <div class="card-actions">
+                                        <button class="btn btn-outline btn-blue card-flip-btn">Saiba mais</button>
+                                        <div class="share-buttons">
+                                            <button class="share-btn instagram" aria-label="Compartilhar no Instagram">
+                                                <i class="fab fa-instagram"></i>
+                                            </button>
+                                            <button class="share-btn linkedin" aria-label="Compartilhar no LinkedIn">
+                                                <i class="fab fa-linkedin-in"></i>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="card-back">
+                                    <h3 class="card-title blue-text">Microsserviços</h3>
+                                    <ul class="card-details">
+                                        <li><strong>Problema:</strong> Monolitos complexos e difíceis de manter</li>
+                                        <li><strong>Solução:</strong> Serviços pequenos e independentes</li>
+                                        <li><strong>Características:</strong> Implantação independente, APIs bem definidas</li>
+                                        <li><strong>Benefício:</strong> Escalabilidade, resiliência e agilidade</li>
+                                    </ul>
+                                    <button class="btn btn-outline btn-blue card-flip-btn">Voltar</button>
+                                </div>
                             </div>
-                        </div>
-                    </div>
-                    <div class="card-back">
-                        <h3 class="card-title blue-text">Microsserviços</h3>
-                        <ul class="card-details">
-                            <li><strong>Problema:</strong> Monolitos complexos e difíceis de manter</li>
-                            <li><strong>Solução:</strong> Serviços pequenos e independentes</li>
-                            <li><strong>Características:</strong> Implantação independente, APIs bem definidas</li>
-                            <li><strong>Benefício:</strong> Escalabilidade, resiliência e agilidade</li>
-                        </ul>
-                        <button class="btn btn-outline btn-blue card-flip-btn">Voltar</button>
-                    </div>
+                        </li>
+                    </ul>
+                </div>
+                
+                <!-- Controles do Carrossel -->
+                <button class="carousel-button carousel-button-left">
+                    <i class="fas fa-chevron-left"></i>
+                </button>
+                <button class="carousel-button carousel-button-right">
+                    <i class="fas fa-chevron-right"></i>
+                </button>
+                
+                <!-- Indicadores de Navegação -->
+                <div class="carousel-nav">
+                    <button class="carousel-indicator active" data-slide="0"></button>
+                    <button class="carousel-indicator" data-slide="1"></button>
+                    <button class="carousel-indicator" data-slide="2"></button>
                 </div>
             </div>
         </div>
@@ -213,7 +240,7 @@
     </section>
 
     <!-- Newsletter Section -->
-    <!-- <section class="newsletter-section">
+    <section class="newsletter-section">
         <div class="container">
             <h2>Fique por dentro das novidades</h2>
             <p>Receba atualizações sobre novos conteúdos e eventos</p>
@@ -222,7 +249,7 @@
                 <button type="submit" class="btn btn-primary">Inscrever-se</button>
             </form>
         </div>
-    </section> -->
+    </section>
 
     <!-- Footer -->
     <footer class="footer">

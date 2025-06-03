@@ -1,0 +1,392 @@
+
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2rem;
+}
+
+h1 {
+    text-align: center;
+    margin-bottom: 1rem;
+    color: #2c3e50;
+    font-size: 2.5rem;
+}
+
+.description {
+    text-align: center;
+    margin-bottom: 2rem;
+    color: #7f8c8d;
+    font-size: 1.1rem;
+}
+
+/* Controles e legenda */
+.controls {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 2rem;
+}
+
+#reset-btn {
+    background-color: #3498db;
+    color: white;
+    border: none;
+    padding: 0.5rem 1rem;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: background-color 0.3s;
+}
+
+#reset-btn:hover {
+    background-color: #2980b9;
+}
+
+.legend {
+    display: flex;
+    gap: 1.5rem;
+}
+
+.legend-item {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.legend-color {
+    width: 20px;
+    height: 20px;
+    border-radius: 4px;
+}
+
+.tenant-1-color {
+    background-color: #3498db;
+}
+
+.tenant-2-color {
+    background-color: #e74c3c;
+}
+
+/* Container da arquitetura */
+.architecture-container {
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    padding: 2rem;
+    margin-bottom: 2rem;
+    position: relative;
+    min-height: 500px;
+}
+
+/* Camadas */
+.layer {
+    margin-bottom: 3rem;
+    position: relative;
+}
+
+.layer h2 {
+    margin-bottom: 1.5rem;
+    color: #2c3e50;
+    font-size: 1.5rem;
+    border-bottom: 2px solid #ecf0f1;
+    padding-bottom: 0.5rem;
+}
+
+/* Tenants (Empresas) */
+.tenants {
+    display: flex;
+    justify-content: space-around;
+    gap: 2rem;
+}
+
+.tenant {
+    background-color: white;
+    border-radius: 8px;
+    padding: 0.5rem;
+    width: 25%;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    cursor: pointer;
+    transition: all 0.3s;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    position: relative;
+}
+
+.tenant:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+.tenant-1 {
+    border-left: 5px solid #3498db;
+}
+
+.tenant-2 {
+    border-left: 5px solid #e74c3c;
+}
+
+.tenant-icon {
+    background-color: #ecf0f1;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.building-icon {
+    width: 30px;
+    height: 30px;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%232c3e50' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Crect x='4' y='2' width='16' height='20' rx='2' ry='2'%3E%3C/rect%3E%3Cline x1='12' y1='6' x2='12' y2='6'%3E%3C/line%3E%3Cline x1='12' y1='10' x2='12' y2='10'%3E%3C/line%3E%3Cline x1='12' y1='14' x2='12' y2='14'%3E%3C/line%3E%3Cline x1='12' y1='18' x2='12' y2='18'%3E%3C/line%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+.tenant-info h3 {
+    margin-bottom: 0.25rem;
+    color: #2c3e50;
+}
+
+.tenant-info p {
+    color: #7f8c8d;
+    font-size: 0.9rem;
+}
+
+/* Camada de serviço */
+.service-layer {
+    position: relative;
+}
+
+.service-box {
+    background-color: #f8f9fa;
+    border-radius: 8px;
+    padding: 1.5rem;
+    margin: 0 auto;
+    width: 70%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+    position: relative;
+}
+
+.service-icon {
+    background-color: #ecf0f1;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.gear-icon {
+    width: 30px;
+    height: 30px;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%232c3e50' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Ccircle cx='12' cy='12' r='3'%3E%3C/circle%3E%3Cpath d='M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z'%3E%3C/path%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+.service-info {
+    text-align: center;
+}
+
+.service-info h3 {
+    margin-bottom: 0.25rem;
+    color: #2c3e50;
+}
+
+.service-info p {
+    color: #7f8c8d;
+    font-size: 0.9rem;
+}
+
+.tenant-filter {
+    background-color: #e8f4fc;
+    border-radius: 8px;
+    padding: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    width: 80%;
+    margin-top: 1rem;
+}
+
+.filter-icon {
+    width: 24px;
+    height: 24px;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%233498db' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolygon points='22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3'%3E%3C/polygon%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+/* Bancos de dados */
+.databases {
+    display: flex;
+    justify-content: space-around;
+    gap: 2rem;
+}
+
+.database {
+    background-color: white;
+    border-radius: 8px;
+    padding: 1.5rem;
+    width: 45%;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    cursor: pointer;
+    transition: all 0.3s;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.database:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+.database-icon {
+    background-color: #ecf0f1;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.database-cylinder {
+    width: 30px;
+    height: 30px;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%232c3e50' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cellipse cx='12' cy='5' rx='9' ry='3'%3E%3C/ellipse%3E%3Cpath d='M21 12c0 1.66-4 3-9 3s-9-1.34-9-3'%3E%3C/path%3E%3Cpath d='M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5'%3E%3C/path%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+.database-info h3 {
+    margin-bottom: 0.25rem;
+    color: #2c3e50;
+}
+
+.database-info p {
+    color: #7f8c8d;
+    font-size: 0.9rem;
+}
+
+/* Conexões */
+.connection {
+    position: absolute;
+    background-color: #bdc3c7;
+    z-index: 1;
+    transition: all 0.3s;
+}
+
+.connection-vertical {
+    width: 4px;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.connection-horizontal {
+    height: 4px;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+/* Painel de informações */
+.info-panel {
+    background-color: white;
+    border-radius: 8px;
+    padding: 1.5rem;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.info-panel h2 {
+    margin-bottom: 1rem;
+    color: #2c3e50;
+    font-size: 1.5rem;
+    border-bottom: 2px solid #ecf0f1;
+    padding-bottom: 0.5rem;
+}
+
+#info-content {
+    padding: 1rem;
+    background-color: #f8f9fa;
+    border-radius: 4px;
+    min-height: 100px;
+}
+
+/* Classes para interatividade */
+.active-tenant {
+    border-width: 5px;
+    transform: translateY(-5px);
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.15);
+}
+
+.active-database {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.15);
+}
+
+.active-connection {
+    background-color: #3498db;
+    width: 6px;
+}
+
+.tenant-1-connection {
+    background-color: #3498db;
+}
+
+.tenant-2-connection {
+    background-color: #e74c3c;
+}
+
+/* Animações */
+@keyframes pulse {
+    0% {
+        transform: scale(1);
+        opacity: 1;
+    }
+    50% {
+        transform: scale(1.05);
+        opacity: 0.8;
+    }
+    100% {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+.pulse {
+    animation: pulse 1.5s infinite;
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+    .container {
+        padding: 1rem;
+    }
+    
+    .tenants, .databases {
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    .tenant, .database {
+        width: 90%;
+    }
+    
+    .service-box {
+        width: 90%;
+    }
+    
+    .controls {
+        flex-direction: column;
+        gap: 1rem;
+    }
+}

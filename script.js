@@ -6,10 +6,18 @@ const cardFlipButtons = document.querySelectorAll('.card-flip-btn');
 const shareButtons = document.querySelectorAll('.share-btn');
 const newsletterForm = document.querySelector('.newsletter-form');
 
+// Variáveis do carrossel
+const carouselTrack = document.querySelector('.carousel-track');
+const carouselSlides = document.querySelectorAll('.carousel-slide');
+const prevButton = document.querySelector('.carousel-button-left');
+const nextButton = document.querySelector('.carousel-button-right');
+const indicators = document.querySelectorAll('.carousel-indicator');
+
 // Inicialização quando o DOM estiver carregado
 document.addEventListener('DOMContentLoaded', () => {
     initializeMenu();
     initializeCards();
+    initializeCarousel();
     initializeShareButtons();
     initializeNewsletterForm();
 });
@@ -71,6 +79,130 @@ function initializeCards() {
             card.classList.toggle('flipped');
         });
     });
+}
+
+// Inicializar carrossel
+function initializeCarousel() {
+    let currentSlide = 0;
+    const slideCount = carouselSlides.length;
+    let autoplayInterval;
+    let isAutoPlaying = true;
+    
+    // Configurar slides iniciais
+    updateCarousel();
+    
+    // Iniciar autoplay
+    startAutoplay();
+    
+    // Evento para botão anterior
+    prevButton.addEventListener('click', () => {
+        pauseAutoplay();
+        moveToSlide(currentSlide - 1);
+    });
+    
+    // Evento para botão próximo
+    nextButton.addEventListener('click', () => {
+        pauseAutoplay();
+        moveToSlide(currentSlide + 1);
+    });
+    
+    // Eventos para indicadores
+    indicators.forEach((indicator, index) => {
+        indicator.addEventListener('click', () => {
+            pauseAutoplay();
+            moveToSlide(index);
+        });
+    });
+    
+    // Eventos de toque para dispositivos móveis
+    let touchStartX = 0;
+    let touchEndX = 0;
+    
+    carouselTrack.addEventListener('touchstart', (e) => {
+        pauseAutoplay();
+        touchStartX = e.changedTouches[0].screenX;
+    });
+    
+    carouselTrack.addEventListener('touchend', (e) => {
+        touchEndX = e.changedTouches[0].screenX;
+        handleSwipe();
+    });
+    
+    // Pausar autoplay ao passar o mouse sobre o carrossel
+    document.querySelector('.carousel-container').addEventListener('mouseenter', pauseAutoplay);
+    document.querySelector('.carousel-container').addEventListener('mouseleave', startAutoplay);
+    
+    // Função para lidar com swipe
+    function handleSwipe() {
+        const swipeThreshold = 50;
+        if (touchEndX < touchStartX - swipeThreshold) {
+            // Swipe para esquerda (próximo slide)
+            moveToSlide(currentSlide + 1);
+        } else if (touchEndX > touchStartX + swipeThreshold) {
+            // Swipe para direita (slide anterior)
+            moveToSlide(currentSlide - 1);
+        }
+    }
+    
+    // Função para mover para um slide específico
+    function moveToSlide(index) {
+        // Lidar com índices fora dos limites
+        if (index < 0) {
+            index = slideCount - 1;
+        } else if (index >= slideCount) {
+            index = 0;
+        }
+        
+        currentSlide = index;
+        updateCarousel();
+    }
+    
+    // Função para atualizar o carrossel
+    function updateCarousel() {
+        // Atualizar classes dos slides
+        carouselSlides.forEach((slide, index) => {
+            slide.classList.remove('active', 'prev', 'next');
+            
+            if (index === currentSlide) {
+                slide.classList.add('active');
+            } else if (index === getPrevIndex(currentSlide)) {
+                slide.classList.add('prev');
+            } else if (index === getNextIndex(currentSlide)) {
+                slide.classList.add('next');
+            }
+        });
+        
+        // Atualizar indicadores
+        indicators.forEach((indicator, index) => {
+            indicator.classList.toggle('active', index === currentSlide);
+        });
+    }
+    
+    // Função para obter o índice do slide anterior
+    function getPrevIndex(current) {
+        return (current - 1 + slideCount) % slideCount;
+    }
+    
+    // Função para obter o índice do próximo slide
+    function getNextIndex(current) {
+        return (current + 1) % slideCount;
+    }
+    
+    // Função para iniciar autoplay
+    function startAutoplay() {
+        if (!isAutoPlaying) {
+            autoplayInterval = setInterval(() => {
+                moveToSlide(currentSlide + 1);
+            }, 5000);
+            isAutoPlaying = true;
+        }
+    }
+    
+    // Função para pausar autoplay
+    function pauseAutoplay() {
+        clearInterval(autoplayInterval);
+        isAutoPlaying = false;
+    }
 }
 
 // Inicializar botões de compartilhamento
@@ -138,7 +270,6 @@ function initializeNewsletterForm() {
 
 // Animações ao scroll
 window.addEventListener('scroll', () => {
-    const cards = document.querySelectorAll('.card');
     const resources = document.querySelectorAll('.resource-item');
     
     // Função para verificar se elemento está visível na viewport
@@ -149,15 +280,6 @@ window.addEventListener('scroll', () => {
             rect.bottom >= 0
         );
     }
-    
-    // Animar cards quando visíveis
-    cards.forEach(card => {
-        if (isElementInViewport(card) && !card.classList.contains('animated')) {
-            card.classList.add('animated');
-            card.style.opacity = '1';
-            card.style.transform = 'translateY(0)';
-        }
-    });
     
     // Animar recursos quando visíveis
     resources.forEach((resource, index) => {
@@ -173,16 +295,9 @@ window.addEventListener('scroll', () => {
 
 // Inicializar animações
 function initializeAnimations() {
-    const cards = document.querySelectorAll('.card');
     const resources = document.querySelectorAll('.resource-item');
     
     // Configurar estado inicial
-    cards.forEach(card => {
-        card.style.opacity = '0';
-        card.style.transform = 'translateY(20px)';
-        card.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
-    });
-    
     resources.forEach(resource => {
         resource.style.opacity = '0';
         resource.style.transform = 'translateY(20px)';

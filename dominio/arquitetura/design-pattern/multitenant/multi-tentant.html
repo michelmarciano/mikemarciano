@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../../../../css/default.css">
+    <link rel="stylesheet" href="styles.css">
+
+
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible+Next:ital,wght@0,200..800;1,200..800&display=swap"
+        rel="stylesheet">
+
+    <title>Multi-Tenant</title>
+</head>
+
+<body>
+    <h1>Multi-Tenant</h1>
+
+        <section>
+            <div class="container">
+
+
+                <div class="controls">
+                    <button id="reset-btn">Resetar Visualização</button>
+                    <div class="legend">
+                        <div class="legend-item">
+                            <div class="legend-color tenant-1-color"></div>
+                            <span>Empresa A</span>
+                        </div>
+                        <div class="legend-item">
+                            <div class="legend-color tenant-2-color"></div>
+                            <span>Empresa B</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="architecture-container">
+                    <div class="layer application-layer">
+                        <h2>Camada de Aplicação</h2>
+                        <div class="tenants">
+                            <div class="tenant tenant-1" id="tenant-1">
+                                <div class="tenant-icon">
+                                    <i class="building-icon"></i>
+                                </div>
+                                <div class="tenant-info">
+                                    <h3>Empresa A</h3>
+                                    <p>Tenant ID: T001</p>
+                                </div>
+                            </div>
+                            <div class="tenant tenant-2" id="tenant-2">
+                                <div class="tenant-icon">
+                                    <i class="building-icon"></i>
+                                </div>
+                                <div class="tenant-info">
+                                    <h3>Empresa B</h3>
+                                    <p>Tenant ID: T002</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="layer service-layer">
+                        <h2>Camada de Serviço</h2>
+                        <div class="service-box">
+                            <div class="service-icon">
+                                <i class="gear-icon"></i>
+                            </div>
+                            <div class="service-info">
+                                <h3>Aplicação Multitenant</h3>
+                                <p>Lógica de negócio compartilhada</p>
+                            </div>
+                            <div class="tenant-filter">
+                                <div class="filter-icon"></div>
+                                <p>Filtro de Tenant</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="layer database-layer">
+                        <h2>Camada de Dados</h2>
+                        <div class="databases">
+                            <div class="database" id="database-1">
+                                <div class="database-icon">
+                                    <i class="database-cylinder"></i>
+                                </div>
+                                <div class="database-info">
+                                    <h3>Banco de Dados 1</h3>
+                                    <p>Schema: Empresa A</p>
+                                </div>
+                            </div>
+                            <div class="database" id="database-2">
+                                <div class="database-icon">
+                                    <i class="database-cylinder"></i>
+                                </div>
+                                <div class="database-info">
+                                    <h3>Banco de Dados 2</h3>
+                                    <p>Schema: Empresa B</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="info-panel">
+                    <h2>Informações</h2>
+                    <div id="info-content">
+                        <p>Selecione uma empresa ou banco de dados para ver detalhes sobre a arquitetura multitenant.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <script src="script.js"></script>
+
+        </section>
+        <h2>O que é Multi-Tenant?</h2>
+        <p>
+            Multi-tenant (multi-inquilino) é uma arquitetura de software onde uma única instância da aplicação serve
+            múltiplos clientes (tenants), mantendo seus dados isolados. Em termos práticos, imagine um sistema de gestão
+            financeira que atende diversas empresas sem a necessidade de múltiplas instalações ou deploys separados.
+        </p>
+
+
+    <div class="section">
+        <h2>Como Funciona?</h2>
+        <p>
+            Cada empresa (tenant) recebe um identificador único (Tenant ID). Por exemplo:
+        </p>
+        <ul>
+            <li>Empresa 1: Tenant ID = 1</li>
+            <li>Empresa 2: Tenant ID = 2</li>
+        </ul>
+        <p>
+            Embora todas as empresas utilizem a mesma aplicação, seus dados permanecem completamente isolados. Cada
+            empresa só tem acesso aos seus próprios dados, garantindo segurança e privacidade. Este modelo é fundamental
+            em plataformas SaaS (Software as a Service).
+        </p>
+    </div>
+
+    <div class="section">
+        <h2>Abordagens de Implementação</h2>
+        <p>Existem três principais abordagens para implementar a arquitetura multi-tenant:</p>
+
+        <h3>1. Múltiplos Bancos de Dados</h3>
+        <p>
+            Cada tenant possui seu próprio banco de dados. Quando o Tenant ID 1 acessa o sistema, os dados são salvos no
+            banco 1; quando o Tenant ID 2 acessa, os dados vão para o banco 2.
+        </p>
+
+        <h3>2. Tabelas Separadas</h3>
+        <p>
+            Utiliza-se tabelas diferentes para cada tenant. Por exemplo: produtos_tenant1 e produtos_tenant2, cada uma
+            contendo apenas os dados da respectiva empresa.
+        </p>
+
+        <h3>3. Tabelas Compartilhadas com Tenant ID</h3>
+        <p>
+            A abordagem mais comum utiliza uma única tabela com uma chave primária composta que inclui o Tenant ID. As
+            consultas são filtradas pelo Tenant ID, garantindo que cada empresa veja apenas seus próprios dados.
+        </p>
+    </div>
+
+    <div class="section">
+        <h2>Considerações Importantes</h2>
+        <p>
+            A escolha da melhor abordagem depende de vários fatores:
+        </p>
+        <ul>
+            <li>Volume de dados por tenant</li>
+            <li>Número de tenants</li>
+            <li>Requisitos de isolamento</li>
+            <li>Regulamentações específicas</li>
+            <li>Necessidades de escalabilidade</li>
+        </ul>
+        <p>
+            Por exemplo, para um cliente grande como a Coca-Cola, pode ser necessário um ambiente isolado devido a:
+        </p>
+        <ul>
+            <li>Alto volume de tráfego</li>
+            <li>Requisitos específicos de governança</li>
+            <li>Necessidade de isolamento de dados por regulamentação</li>
+        </ul>
+    </div>
+
+    <div class="section">
+        <h2>Conclusão</h2>
+        <p>
+            A arquitetura multi-tenant oferece flexibilidade para atender diferentes necessidades dos clientes. A
+            escolha da implementação deve ser baseada no contexto específico do negócio, considerando fatores como
+            tamanho dos clientes, volume de dados e requisitos regulatórios. Não existe uma solução única - a melhor
+            abordagem é aquela que melhor atende às necessidades específicas do seu caso de uso.
+        </p>
+    </div>
+</body>
+
+</html>
