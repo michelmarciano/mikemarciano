@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Arquitetura Single-Tenant</title>
+    <style>
+        :root {
+            --tenant-color: #4285F4;
+            --service-color: #34A853;
+            --db-color: #FBBC05;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f5f7fa;
+            margin: 0;
+            padding: 20px;
+            color: #333;
+        }
+        
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        h1 {
+            text-align: center;
+            color: #2c3e50;
+            margin-bottom: 30px;
+        }
+        
+        .architecture {
+            display: flex;
+            flex-direction: column;
+            gap: 30px;
+        }
+        
+        .layer {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            border-radius: 10px;
+            background-color: white;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            position: relative;
+        }
+        
+        .presentation-layer {
+            min-height: 120px;
+        }
+        
+        .service-layer {
+            min-height: 100px;
+            background-color: #e8f5e9;
+        }
+        
+        .data-layer {
+            min-height: 150px;
+            background-color: #fff8e1;
+        }
+        
+        .tenant {
+            padding: 15px 25px;
+            border-radius: 8px;
+            background-color: var(--tenant-color);
+            color: white;
+            text-align: center;
+            width: 300px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+        
+        .service {
+            padding: 15px;
+            border-radius: 8px;
+            background-color: var(--service-color);
+            color: white;
+            text-align: center;
+            width: 400px;
+        }
+        
+        .database {
+            padding: 15px;
+            border-radius: 8px;
+            background-color: var(--db-color);
+            text-align: center;
+            width: 350px;
+        }
+        
+        .connection {
+            position: absolute;
+            background-color: #78909c;
+            width: 2px;
+            height: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: -1;
+        }
+        
+        .presentation-to-service {
+            top: -30px;
+        }
+        
+        .service-to-data {
+            top: -30px;
+        }
+        
+        .query-display {
+            margin-top: 40px;
+            padding: 20px;
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+        
+        .sql-query {
+            font-family: 'Courier New', Courier, monospace;
+            background-color: #f5f5f5;
+            padding: 15px;
+            border-radius: 5px;
+            overflow-x: auto;
+            margin: 15px 0;
+        }
+        
+        .query-result {
+            margin-top: 15px;
+            padding: 15px;
+            background-color: #e8f5e9;
+            border-radius: 5px;
+            border-left: 4px solid var(--service-color);
+        }
+        
+        .action-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 20px;
+        }
+        
+        button {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            background-color: #2c3e50;
+            color: white;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        
+        button:hover {
+            background-color: #1a252f;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 10px;
+        }
+        
+        th {
+            background-color: #2c3e50;
+            color: white;
+            padding: 8px;
+            text-align: left;
+        }
+        
+        td {
+            padding: 8px;
+            border-bottom: 1px solid #ddd;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Arquitetura Single-Tenant</h1>
+        
+        <div class="architecture">
+            <!-- Camada de Apresentação -->
+            <div class="layer presentation-layer">
+                <div class="tenant">
+                    <h3>Minha Empresa</h3>
+                    <p>Tenant Único</p>
+                </div>
+            </div>
+            
+            <!-- Conexão visual -->
+            <div class="connection presentation-to-service"></div>
+            
+            <!-- Camada de Serviço -->
+            <div class="layer service-layer">
+                <div class="service">
+                    <h3>Camada de Serviço</h3>
+                    <p>Processa requisições e acessa o banco de dados</p>
+                </div>
+            </div>
+            
+            <!-- Conexão visual -->
+            <div class="connection service-to-data"></div>
+            
+            <!-- Camada de Dados -->
+            <div class="layer data-layer">
+                <div class="database">
+                    <h3>Banco de Dados</h3>
+                    <p>Dados da Minha Empresa</p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="query-display">
+            <h2>Consulta ao Banco de Dados</h2>
+            <div class="sql-query" id="sqlQuery">
+                Clique em um botão para executar uma consulta
+            </div>
+            
+            <h3>Resultado:</h3>
+            <div class="query-result" id="queryResult">
+                Nenhum resultado ainda
+            </div>
+            
+            <div class="action-buttons">
+                <button onclick="executeQuery('users')">Consultar Usuários</button>
+                <button onclick="executeQuery('products')">Consultar Produtos</button>
+                <button onclick="executeQuery('orders')">Consultar Pedidos</button>
+                <button onclick="resetQuery()">Resetar</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Dados de exemplo para o tenant único
+        const tenantData = {
+            name: "Minha Empresa",
+            dbName: "minha_empresa_db",
+            users: [
+                { id: 1, name: "João Silva", email: "joao@empresa.com", role: "Admin" },
+                { id: 2, name: "Maria Souza", email: "maria@empresa.com", role: "User" },
+                { id: 3, name: "Carlos Oliveira", email: "carlos@empresa.com", role: "Manager" }
+            ],
+            products: [
+                { id: 101, name: "Produto Premium", price: 99.90, stock: 50 },
+                { id: 102, name: "Produto Standard", price: 49.90, stock: 100 },
+                { id: 103, name: "Produto Básico", price: 29.90, stock: 200 }
+            ],
+            orders: [
+                { id: 1001, user_id: 1, total: 299.80, date: "2023-06-15" },
+                { id: 1002, user_id: 2, total: 149.90, date: "2023-06-16" },
+                { id: 1003, user_id: 3, total: 79.80, date: "2023-06-17" }
+            ]
+        };
+        
+        function executeQuery(table) {
+            const data = tenantData[table];
+            
+            // Gera a representação do SQL
+            const sql = `SELECT * FROM ${table};`;
+            document.getElementById('sqlQuery').textContent = sql;
+            
+            // Processa os resultados
+            let resultHtml = `<h4>Resultados da tabela ${table} (${tenantData.dbName}):</h4>`;
+            
+            if (data && data.length > 0) {
+                resultHtml += `<table>`;
+                
+                // Cabeçalho da tabela
+                resultHtml += `<tr>`;
+                Object.keys(data[0]).forEach(key => {
+                    resultHtml += `<th>${key}</th>`;
+                });
+                resultHtml += `</tr>`;
+                
+                // Linhas da tabela
+                data.forEach(item => {
+                    resultHtml += `<tr>`;
+                    Object.values(item).forEach(val => {
+                        resultHtml += `<td>${val}</td>`;
+                    });
+                    resultHtml += `</tr>`;
+                });
+                
+                resultHtml += `</table>`;
+                resultHtml += `<p style="margin-top: 10px; font-size: 0.9em; color: #666;">${data.length} registros encontrados</p>`;
+            } else {
+                resultHtml += `<p>Nenhum dado encontrado nesta tabela</p>`;
+            }
+            
+            document.getElementById('queryResult').innerHTML = resultHtml;
+        }
+        
+        function resetQuery() {
+            document.getElementById('sqlQuery').textContent = '-- Consulta resetada';
+            document.getElementById('queryResult').innerHTML = '<em>Nenhum resultado ainda</em>';
+        }
+    </script>
+</body>
+</html>

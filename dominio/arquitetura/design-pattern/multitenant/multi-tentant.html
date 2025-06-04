@@ -5,8 +5,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../../../../css/default.css">
-    <link rel="stylesheet" href="styles.css">
-
 
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -21,109 +19,12 @@
 <body>
     <h1>Multi-Tenant</h1>
 
-        <section>
-            <div class="container">
-
-
-                <div class="controls">
-                    <button id="reset-btn">Resetar Visualização</button>
-                    <div class="legend">
-                        <div class="legend-item">
-                            <div class="legend-color tenant-1-color"></div>
-                            <span>Empresa A</span>
-                        </div>
-                        <div class="legend-item">
-                            <div class="legend-color tenant-2-color"></div>
-                            <span>Empresa B</span>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="architecture-container">
-                    <div class="layer application-layer">
-                        <h2>Camada de Aplicação</h2>
-                        <div class="tenants">
-                            <div class="tenant tenant-1" id="tenant-1">
-                                <div class="tenant-icon">
-                                    <i class="building-icon"></i>
-                                </div>
-                                <div class="tenant-info">
-                                    <h3>Empresa A</h3>
-                                    <p>Tenant ID: T001</p>
-                                </div>
-                            </div>
-                            <div class="tenant tenant-2" id="tenant-2">
-                                <div class="tenant-icon">
-                                    <i class="building-icon"></i>
-                                </div>
-                                <div class="tenant-info">
-                                    <h3>Empresa B</h3>
-                                    <p>Tenant ID: T002</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="layer service-layer">
-                        <h2>Camada de Serviço</h2>
-                        <div class="service-box">
-                            <div class="service-icon">
-                                <i class="gear-icon"></i>
-                            </div>
-                            <div class="service-info">
-                                <h3>Aplicação Multitenant</h3>
-                                <p>Lógica de negócio compartilhada</p>
-                            </div>
-                            <div class="tenant-filter">
-                                <div class="filter-icon"></div>
-                                <p>Filtro de Tenant</p>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="layer database-layer">
-                        <h2>Camada de Dados</h2>
-                        <div class="databases">
-                            <div class="database" id="database-1">
-                                <div class="database-icon">
-                                    <i class="database-cylinder"></i>
-                                </div>
-                                <div class="database-info">
-                                    <h3>Banco de Dados 1</h3>
-                                    <p>Schema: Empresa A</p>
-                                </div>
-                            </div>
-                            <div class="database" id="database-2">
-                                <div class="database-icon">
-                                    <i class="database-cylinder"></i>
-                                </div>
-                                <div class="database-info">
-                                    <h3>Banco de Dados 2</h3>
-                                    <p>Schema: Empresa B</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="info-panel">
-                    <h2>Informações</h2>
-                    <div id="info-content">
-                        <p>Selecione uma empresa ou banco de dados para ver detalhes sobre a arquitetura multitenant.
-                        </p>
-                    </div>
-                </div>
-            </div>
-
-            <script src="script.js"></script>
-
-        </section>
-        <h2>O que é Multi-Tenant?</h2>
-        <p>
-            Multi-tenant (multi-inquilino) é uma arquitetura de software onde uma única instância da aplicação serve
-            múltiplos clientes (tenants), mantendo seus dados isolados. Em termos práticos, imagine um sistema de gestão
-            financeira que atende diversas empresas sem a necessidade de múltiplas instalações ou deploys separados.
-        </p>
+    <h2>O que é Multi-Tenant?</h2>
+    <p>
+        Multi-tenant (multi-inquilino) é uma arquitetura de software onde uma única instância da aplicação serve
+        múltiplos clientes (tenants), mantendo seus dados isolados. Em termos práticos, imagine um sistema de gestão
+        financeira que atende diversas empresas sem a necessidade de múltiplas instalações ou deploys separados.
+    </p>
 
 
     <div class="section">
@@ -151,6 +52,10 @@
             Cada tenant possui seu próprio banco de dados. Quando o Tenant ID 1 acessa o sistema, os dados são salvos no
             banco 1; quando o Tenant ID 2 acessa, os dados vão para o banco 2.
         </p>
+       
+        <!-- <iframe src="mt-database.html" width="100%" height="500"></iframe> -->
+
+        <div id="multi-tentant-database"></div>
 
         <h3>2. Tabelas Separadas</h3>
         <p>
@@ -196,6 +101,16 @@
             abordagem é aquela que melhor atende às necessidades específicas do seu caso de uso.
         </p>
     </div>
+
+    <script src="script.js"></script> 
+
+    <!-- <script>
+        fetch('mt-database.html')
+            .then(response => response.text())
+            .then(data => {
+                document.getElementById('multi-tentant-database').innerHTML = data;
+            }); -->
+    </script>
 </body>
 
 </html>
