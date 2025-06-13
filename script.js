@@ -8,10 +8,10 @@ const newsletterForm = document.querySelector('.newsletter-form');
 
 // Variáveis do carrossel
 const carouselTrack = document.querySelector('.carousel-track');
-const carouselSlides = document.querySelectorAll('.carousel-slide');
+const carouselPages = document.querySelectorAll('.carousel-page');
 const prevButton = document.querySelector('.carousel-button-left');
 const nextButton = document.querySelector('.carousel-button-right');
-const indicators = document.querySelectorAll('.carousel-indicator');
+const paginationIndicators = document.querySelectorAll('.pagination-indicator');
 
 // Inicialização quando o DOM estiver carregado
 document.addEventListener('DOMContentLoaded', () => {
@@ -81,14 +81,14 @@ function initializeCards() {
     });
 }
 
-// Inicializar carrossel
+// Inicializar carrossel paginado
 function initializeCarousel() {
-    let currentSlide = 0;
-    const slideCount = carouselSlides.length;
+    let currentPage = 0;
+    const pageCount = carouselPages.length;
     let autoplayInterval;
     let isAutoPlaying = true;
     
-    // Configurar slides iniciais
+    // Configurar páginas iniciais
     updateCarousel();
     
     // Iniciar autoplay
@@ -97,20 +97,20 @@ function initializeCarousel() {
     // Evento para botão anterior
     prevButton.addEventListener('click', () => {
         pauseAutoplay();
-        moveToSlide(currentSlide - 1);
+        moveToPage(currentPage - 1);
     });
     
     // Evento para botão próximo
     nextButton.addEventListener('click', () => {
         pauseAutoplay();
-        moveToSlide(currentSlide + 1);
+        moveToPage(currentPage + 1);
     });
     
-    // Eventos para indicadores
-    indicators.forEach((indicator, index) => {
+    // Eventos para indicadores de paginação
+    paginationIndicators.forEach((indicator, index) => {
         indicator.addEventListener('click', () => {
             pauseAutoplay();
-            moveToSlide(index);
+            moveToPage(index);
         });
     });
     
@@ -136,63 +136,52 @@ function initializeCarousel() {
     function handleSwipe() {
         const swipeThreshold = 50;
         if (touchEndX < touchStartX - swipeThreshold) {
-            // Swipe para esquerda (próximo slide)
-            moveToSlide(currentSlide + 1);
+            // Swipe para esquerda (próxima página)
+            moveToPage(currentPage + 1);
         } else if (touchEndX > touchStartX + swipeThreshold) {
-            // Swipe para direita (slide anterior)
-            moveToSlide(currentSlide - 1);
+            // Swipe para direita (página anterior)
+            moveToPage(currentPage - 1);
         }
     }
     
-    // Função para mover para um slide específico
-    function moveToSlide(index) {
+    // Função para mover para uma página específica
+    function moveToPage(index) {
         // Lidar com índices fora dos limites
         if (index < 0) {
-            index = slideCount - 1;
-        } else if (index >= slideCount) {
+            index = pageCount - 1;
+        } else if (index >= pageCount) {
             index = 0;
         }
         
-        currentSlide = index;
+        currentPage = index;
         updateCarousel();
     }
     
     // Função para atualizar o carrossel
     function updateCarousel() {
-        // Atualizar classes dos slides
-        carouselSlides.forEach((slide, index) => {
-            slide.classList.remove('active', 'prev', 'next');
-            
-            if (index === currentSlide) {
-                slide.classList.add('active');
-            } else if (index === getPrevIndex(currentSlide)) {
-                slide.classList.add('prev');
-            } else if (index === getNextIndex(currentSlide)) {
-                slide.classList.add('next');
-            }
+        // Mover o track para mostrar a página atual
+        carouselTrack.style.transform = `translateX(-${currentPage * 100}%)`;
+        
+        // Atualizar indicadores de paginação
+        paginationIndicators.forEach((indicator, index) => {
+            indicator.classList.toggle('active', index === currentPage);
         });
         
-        // Atualizar indicadores
-        indicators.forEach((indicator, index) => {
-            indicator.classList.toggle('active', index === currentSlide);
-        });
-    }
-    
-    // Função para obter o índice do slide anterior
-    function getPrevIndex(current) {
-        return (current - 1 + slideCount) % slideCount;
-    }
-    
-    // Função para obter o índice do próximo slide
-    function getNextIndex(current) {
-        return (current + 1) % slideCount;
+        // Atualizar visibilidade dos botões de navegação
+        if (pageCount <= 1) {
+            prevButton.style.display = 'none';
+            nextButton.style.display = 'none';
+        } else {
+            prevButton.style.display = 'flex';
+            nextButton.style.display = 'flex';
+        }
     }
     
     // Função para iniciar autoplay
     function startAutoplay() {
-        if (!isAutoPlaying) {
+        if (!isAutoPlaying && pageCount > 1) {
             autoplayInterval = setInterval(() => {
-                moveToSlide(currentSlide + 1);
+                moveToPage(currentPage + 1);
             }, 5000);
             isAutoPlaying = true;
         }
@@ -203,6 +192,11 @@ function initializeCarousel() {
         clearInterval(autoplayInterval);
         isAutoPlaying = false;
     }
+    
+    // Ajustar carrossel ao redimensionar a janela
+    window.addEventListener('resize', () => {
+        updateCarousel();
+    });
 }
 
 // Inicializar botões de compartilhamento

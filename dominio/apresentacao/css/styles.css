@@ -1,0 +1,456 @@
+/* Variáveis de cores do Google */
+:root {
+    --google-blue: #4285F4;
+    --google-red: #EA4335;
+    --google-yellow: #FBBC05;
+    --google-green: #34A853;
+    --google-grey: #5F6368;
+    --google-light-grey: #F1F3F4;
+    --white: #FFFFFF;
+    --black: #202124;
+    --shadow: rgba(0, 0, 0, 0.1);
+    --transition: all 0.3s ease;
+}
+
+/* Reset e estilos gerais */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Roboto', sans-serif;
+    color: var(--black);
+    background-color: var(--white);
+    overflow: hidden;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-weight: 500;
+    margin-bottom: 1rem;
+}
+
+p {
+    line-height: 1.6;
+    margin-bottom: 1rem;
+}
+
+ul {
+    list-style-position: inside;
+    margin-bottom: 1rem;
+}
+
+.slides-container h1{
+    text-align: center;
+    font-size: 100px;
+}
+
+/* Container principal */
+.presentation-container {
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    overflow: hidden;
+}
+
+/* Barra de navegação superior */
+.top-nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.8rem 1.5rem;
+    background-color: var(--white);
+    box-shadow: 0 2px 5px var(--shadow);
+    z-index: 100;
+}
+
+.logo {
+    font-size: 1.2rem;
+    font-weight: 500;
+    color: var(--google-grey);
+}
+
+.controls {
+    display: flex;
+    gap: 0.5rem;
+}
+
+.control-btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0.5rem;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--google-grey);
+    transition: var(--transition);
+}
+
+.control-btn:hover {
+    background-color: var(--google-light-grey);
+}
+
+/* Menu lateral */
+.side-menu {
+    position: absolute;
+    top: 0;
+    right: -300px;
+    width: 300px;
+    height: 100%;
+    background-color: var(--white);
+    box-shadow: -2px 0 10px var(--shadow);
+    z-index: 200;
+    transition: var(--transition);
+    padding: 1rem 0;
+    overflow-y: auto;
+}
+
+.side-menu.open {
+    right: 0;
+}
+
+.menu-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 1.5rem 1rem;
+    border-bottom: 1px solid var(--google-light-grey);
+    margin-bottom: 1rem;
+}
+
+.close-btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: var(--google-grey);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.5rem;
+    border-radius: 50%;
+    transition: var(--transition);
+}
+
+.close-btn:hover {
+    background-color: var(--google-light-grey);
+}
+
+.slide-list {
+    list-style: none;
+}
+
+.slide-item {
+    padding: 1rem 1.5rem;
+    cursor: pointer;
+    transition: var(--transition);
+    border-left: 4px solid transparent;
+}
+
+.slide-item:hover {
+    background-color: var(--google-light-grey);
+}
+
+.slide-item.active {
+    background-color: rgba(66, 133, 244, 0.1);
+    border-left-color: var(--google-blue);
+    color: var(--google-blue);
+    font-weight: 500;
+}
+
+/* Container dos slides */
+.slides-container {
+    flex: 1;
+    position: relative;
+    overflow: hidden;
+}
+
+/* Estilos dos slides */
+.slide {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transform: translateX(100%);
+    transition: transform 0.5s ease, opacity 0.5s ease;
+    padding: 2rem;
+    overflow-y: auto;
+}
+
+.slide.active {
+    opacity: 1;
+    transform: translateX(0);
+    z-index: 10;
+}
+
+.slide.prev {
+    transform: translateX(-100%);
+}
+
+.slide-content {
+    max-width: 1000px;
+    width: 100%;
+    padding: 2rem;
+    background-color: var(--white);
+    border-radius: 8px;
+    box-shadow: 0 5px 15px var(--shadow);
+}
+
+/* Cores do Google para elementos */
+.blue-text {
+    color: var(--google-blue);
+}
+
+.red-text {
+    color: var(--google-red);
+}
+
+.yellow-text {
+    color: var(--google-yellow);
+}
+
+.green-text {
+    color: var(--google-green);
+}
+
+.google-colors {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    margin: 2rem 0;
+}
+
+.color-dot {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+}
+
+.google-colors.large .color-dot {
+    width: 30px;
+    height: 30px;
+}
+
+.blue {
+    background-color: var(--google-blue);
+}
+
+.red {
+    background-color: var(--google-red);
+}
+
+.yellow {
+    background-color: var(--google-yellow);
+}
+
+.green {
+    background-color: var(--google-green);
+}
+
+/* Layout de duas colunas */
+.two-columns {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+}
+
+@media (max-width: 768px) {
+    .two-columns {
+        grid-template-columns: 1fr;
+    }
+}
+
+.column {
+    display: flex;
+    flex-direction: column;
+}
+
+/* Listas de recursos */
+.feature-list li {
+    margin-bottom: 0.8rem;
+    position: relative;
+    padding-left: 1.5rem;
+    list-style-type: none;
+}
+
+.feature-list li::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0.5rem;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background-color: var(--google-blue);
+}
+
+/* Placeholder de imagem */
+.image-placeholder {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--google-light-grey);
+    border-radius: 8px;
+    padding: 2rem;
+    height: 100%;
+    min-height: 200px;
+}
+
+.image-placeholder svg {
+    margin-bottom: 1rem;
+    color: var(--google-grey);
+}
+
+/* Caixas de conteúdo */
+.content-box {
+    background-color: var(--google-light-grey);
+    border-radius: 8px;
+    padding: 1.5rem;
+    margin-bottom: 1.5rem;
+}
+
+.highlight-box {
+    border-left: 4px solid var(--google-blue);
+    padding: 1rem;
+    background-color: rgba(66, 133, 244, 0.1);
+    margin: 1.5rem 0;
+}
+
+/* Grid para exemplos */
+.grid-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 1.5rem;
+}
+
+.card {
+    border-radius: 8px;
+    padding: 1.5rem;
+    height: 100%;
+    transition: var(--transition);
+    box-shadow: 0 2px 5px var(--shadow);
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 5px 15px var(--shadow);
+}
+
+.blue-card {
+    border-top: 4px solid var(--google-blue);
+}
+
+.red-card {
+    border-top: 4px solid var(--google-red);
+}
+
+.yellow-card {
+    border-top: 4px solid var(--google-yellow);
+}
+
+.green-card {
+    border-top: 4px solid var(--google-green);
+}
+
+/* Conteúdo centralizado */
+.center-content {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+}
+
+.conclusion-box {
+    text-align: center;
+    max-width: 600px;
+}
+
+/* Controles de navegação */
+.navigation-controls {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 2rem;
+    background-color: var(--white);
+    box-shadow: 0 -2px 5px var(--shadow);
+    z-index: 100;
+}
+
+.nav-btn {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    background-color: var(--white);
+    border: 1px solid var(--google-light-grey);
+    border-radius: 4px;
+    padding: 0.5rem 1rem;
+    cursor: pointer;
+    transition: var(--transition);
+    color: var(--google-grey);
+}
+
+.nav-btn:hover {
+    background-color: var(--google-light-grey);
+}
+
+.progress-indicator {
+    font-size: 1rem;
+    color: var(--google-grey);
+}
+
+/* Animações */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+.fade-in {
+    animation: fadeIn 0.5s ease forwards;
+}
+
+/* Modo tela cheia */
+.fullscreen {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 9999;
+    background-color: var(--white);
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+    .slide-content {
+        padding: 1.5rem;
+    }
+    
+    .navigation-controls {
+        padding: 0.8rem 1rem;
+    }
+    
+    .nav-btn {
+        padding: 0.4rem 0.8rem;
+        font-size: 0.9rem;
+    }
+    
+    .side-menu {
+        width: 250px;
+        right: -250px;
+    }
+}
+

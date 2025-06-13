@@ -48,8 +48,8 @@ ul {
 }
 
 img {
-    max-width: 100%;
-    height: auto;
+    width: 450px;
+    height: 200px;
 }
 
 /* Utilitários de cores */
@@ -65,7 +65,7 @@ img {
 
 /* Cabeçalho */
 .header {
-    background: linear-gradient(90deg, var(--red), var(--yellow), var(--blue), var(--green));
+    background-color: var(--white);
     box-shadow: var(--shadow);
     position: sticky;
     top: 0;
@@ -296,7 +296,17 @@ img {
     color: var(--white);
 }
 
-/* Carrossel Section */
+.btn-yellow {
+    color: var(--yellow);
+    border-color: var(--yellow);
+}
+
+.btn-yellow:hover {
+    background-color: var(--yellow);
+    color: var(--white);
+}
+
+/* Carousel Section */
 .carousel-section {
     padding: 80px 0;
     background-color: var(--white);
@@ -330,115 +340,31 @@ img {
 .carousel-track-container {
     position: relative;
     width: 100%;
-    height: 500px;
     overflow: hidden;
 }
 
 /* Carrossel Track */
 .carousel-track {
     position: relative;
-    height: 100%;
-    width: 100%;
     display: flex;
     transition: transform 0.5s ease;
 }
 
-/* Carrossel Slide */
-.carousel-slide {
-    position: absolute;
-    top: 0;
+/* Carrossel Page */
+.carousel-page {
+    min-width: 100%;
+    display: flex;
+    justify-content: center;
+    transition: opacity 0.3s ease;
+}
+
+/* Card Grid */
+.card-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 30px;
     width: 100%;
-    height: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    transition: all 0.5s ease;
-    opacity: 0;
-    transform: scale(0.8);
-}
-
-.carousel-slide.active {
-    opacity: 1;
-    transform: scale(1);
-    z-index: 10;
-}
-
-.carousel-slide.prev {
-    transform: translateX(-100%) scale(0.8);
-    opacity: 0.5;
-    z-index: 5;
-}
-
-.carousel-slide.next {
-    transform: translateX(100%) scale(0.8);
-    opacity: 0.5;
-    z-index: 5;
-}
-
-/* Botões de Navegação do Carrossel */
-.carousel-button {
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    width: 50px;
-    height: 50px;
-    border-radius: 50%;
-    background-color: var(--white);
-    border: none;
-    box-shadow: var(--shadow);
-    cursor: pointer;
-    z-index: 20;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-size: 1.2rem;
-    transition: var(--transition);
-}
-
-.carousel-button:hover {
-    background-color: var(--light-gray);
-    transform: translateY(-50%) scale(1.1);
-}
-
-.carousel-button-left {
-    left: 20px;
-    color: var(--red);
-}
-
-.carousel-button-right {
-    right: 20px;
-    color: var(--blue);
-}
-
-/* Indicadores de Navegação */
-.carousel-nav {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    display: flex;
-    justify-content: center;
-    gap: 10px;
-    z-index: 20;
-}
-
-.carousel-indicator {
-    width: 12px;
-    height: 12px;
-    border-radius: 50%;
-    background-color: var(--medium-gray);
-    border: none;
-    cursor: pointer;
-    transition: var(--transition);
-}
-
-.carousel-indicator:hover {
-    background-color: var(--dark-gray);
-}
-
-.carousel-indicator.active {
-    background-color: var(--blue);
-    transform: scale(1.2);
+    max-width: 900px;
 }
 
 /* Card */
@@ -451,7 +377,6 @@ img {
     position: relative;
     height: 450px;
     width: 100%;
-    max-width: 350px;
     perspective: 1000px;
     transform-style: preserve-3d;
 }
@@ -488,6 +413,10 @@ img {
 
 .microservices {
     background-image: url('https://source.unsplash.com/random/600x400/?blocks,robots');
+}
+
+.cqrs {
+    background-image: url('https://source.unsplash.com/random/600x400/?split,divide');
 }
 
 .card-content {
@@ -558,6 +487,79 @@ img {
     content: '→';
     position: absolute;
     left: 0;
+}
+
+/* Botões de Navegação do Carrossel */
+.carousel-button {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background-color: var(--white);
+    border: none;
+    box-shadow: var(--shadow);
+    cursor: pointer;
+    z-index: 20;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.2rem;
+    transition: var(--transition);
+}
+
+.carousel-button:hover {
+    background-color: var(--light-gray);
+    transform: translateY(-50%) scale(1.1);
+}
+
+.carousel-button-left {
+    left: 20px;
+    color: var(--red);
+}
+
+.carousel-button-right {
+    right: 20px;
+    color: var(--blue);
+}
+
+/* Paginação */
+.carousel-pagination {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    z-index: 20;
+}
+
+.pagination-indicator {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    background-color: var(--white);
+    border: 2px solid var(--medium-gray);
+    color: var(--dark-gray);
+    font-weight: bold;
+    cursor: pointer;
+    transition: var(--transition);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.pagination-indicator:hover {
+    border-color: var(--dark-gray);
+}
+
+.pagination-indicator.active {
+    background-color: var(--blue);
+    border-color: var(--blue);
+    color: var(--white);
+    transform: scale(1.1);
 }
 
 /* Share Buttons */
@@ -870,12 +872,13 @@ img {
         font-size: 2rem;
     }
     
-    .carousel-track-container {
-        height: 450px;
+    .card-grid {
+        grid-template-columns: 1fr;
     }
     
     .card {
-        max-width: 300px;
+        max-width: 350px;
+        margin: 0 auto;
     }
     
     .carousel-button {
@@ -915,13 +918,8 @@ img {
         font-size: 1.8rem;
     }
     
-    .carousel-track-container {
-        height: 400px;
-    }
-    
     .card {
-        max-width: 250px;
-        height: 400px;
+        max-width: 280px;
     }
     
     .card-image {
